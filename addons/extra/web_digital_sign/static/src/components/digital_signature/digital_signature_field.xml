@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="web_digital_sign.SignatureField" owl="1">
+        <DigitalSignature
+            value="signatureValue"
+            readonly="props.readonly"
+            update="(data) => this.updateSignature(data)"
+        />
+    </t>
+</templates>

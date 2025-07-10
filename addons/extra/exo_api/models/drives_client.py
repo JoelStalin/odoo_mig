@@ -13,19 +13,23 @@ class DrivesClientItem(models.Model):
 class DrivesClient(models.Model):
     _name = 'drives.client'
     _description = 'Conduces de un cliente'
-    
+    _rec_name = 'display_name'
+
     partner_id = fields.Many2one('res.partner', 'Shipper', required=True)
     drives = fields.One2many('drive.item', 'drives_client_id', string='Conduces')
     active = fields.Boolean(default=True)
-    
-    def name_get(self):
-        result = []
-        for record in self:
-            drive_names = [drive.name for drive in record.drives]
-            drives_str = ", ".join(drive_names)
-            result.append((record.id, f"{record.partner_id.name} ({drives_str})"))
+    display_name = fields.Char(string="Display Name", compute='_compute_display_name', store=True)
 
-        return result
+    @api.depends('partner_id', 'partner_id.name', 'drives', 'drives.name')
+    def _compute_display_name(self):
+        for record in self:
+            drive_names = [drive.name for drive in record.drives if drive.name]
+            drives_str = ", ".join(drive_names)
+            partner_name = record.partner_id.name if record.partner_id else ""
+            if drives_str:
+                record.display_name = f"{partner_name} ({drives_str})"
+            else:
+                record.display_name = partner_name
 
 
 

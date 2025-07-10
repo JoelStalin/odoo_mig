@@ -1,6 +1,6 @@
 {
     "name": "API",
-    "version": "1.0.0",
+    "version": "17.0.1.0.0",
     "sequence": 2,
     "author": "Emy Saul Soto. <emysaul@hotmail.es>",
     "summary": "Este modulo agrega la posibilidad de crear factura a traves de un API",
@@ -68,11 +68,11 @@
         'views/benefits_and_discounts/benefits_and_discounts.xml',
         'views/benefits_and_discounts/unique_benefits_and_discount.xml',
         'views/benefits_and_discounts/unique_benefits_and_discount_wizard.xml',
-        'views/benefits_and_discounts/unique_benefits_and_discount_sheduled.xml',
+        'views/benefits_and_discounts/unique_benefits_and_discount_scheduled.xml',
         'views/benefits_and_discounts/unique_benefits_and_discount_transaction.xml',
         'views/benefits_and_discounts/discount_carrier.xml',
         'views/benefits_and_discounts/discount_load_view.xml',
-        'views/benefits_and_discounts/discount_parameteres.xml',
+        'views/benefits_and_discounts/discount_parameters.xml',
         'views/benefits_and_discounts/benefits_and_discounts_menu.xml',
         'security/benefits_and_discounts/ir.model.access.csv',
         

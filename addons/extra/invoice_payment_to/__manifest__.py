@@ -1,6 +1,6 @@
 {
     "name": "Invoice Payment To",
-    "version": "1.0.0",
+    "version": "17.0.1.0.0",
     "author": "Santos J. Marte M. <alejandro@neotec.do>",
     "summary": "Este modulo agrega la posibilidad de pago de factura a un tercero.",
     "depends": ["account"],

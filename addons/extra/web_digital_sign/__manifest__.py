@@ -2,7 +2,7 @@
 
 {
     'name': 'Web Digital Signature',
-    'version': '16.0.1.0.0',
+    'version': '17.0.1.0.0',
     "category": "Tools",
     "sequence": 3,
     "summary": """
@@ -27,7 +27,9 @@
     "assets": {
         "web.assets_backend": [
             "/web_digital_sign/static/src/js/digital_sign.js",
-            "/web_digital_sign/static/src/xml/digital_sign.xml",
+            "/web_digital_sign/static/src/components/digital_signature/digital_signature.js",
+            "/web_digital_sign/static/src/components/digital_signature/digital_signature.xml",
+            "/web_digital_sign/static/src/components/digital_signature/digital_signature_field.xml",
         ],
     },
     'installable': True,
