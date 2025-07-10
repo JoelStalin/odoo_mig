@@ -1,126 +1,54 @@
-/** @odoo-module */
+/** @odoo-module **/
 
-import { BinaryField } from "@web/views/fields/binary/binary_field";
 import { registry } from "@web/core/registry";
-import { onWillStart, onMounted, useRef } from "@odoo/owl";
-import { loadJS } from "@web/core/assets";
-import { isBinarySize, toBase64Length } from "@web/core/utils/binary";
+import { Component } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
+import { binaryField, BinaryField } from "@web/views/fields/binary/binary_field";
+import { DigitalSignature } from "@web_digital_sign/components/digital_signature/digital_signature";
 
-export class FieldSignature extends BinaryField {
+export class SignatureField extends BinaryField {
+    static template = "web_digital_sign.SignatureField";
+    static components = { ...super.components, DigitalSignature };
 
     setup() {
         super.setup();
-        this.empty_sign = [];
-        this.sign_options = {
-            'decor-color': '#D1D0CE',
-            'color': '#000',
-            'background-color': '#fff',
-            'height': '150',
-            'width': '550',
-        };
-        this.orm = useService("orm");
-        this.drawsign = useRef("drawsign")
-
-        onWillStart(async () => {
-            await loadJS("/web_digital_sign/static/lib/jSignature/jSignatureCustom.js");
-        });
-
-        onMounted(async () => {
-            let $signature = $(this.drawsign.el).find('.signature')
-            this.renderSignature();
-            $signature.jSignature("init", this.sign_options);
-            $signature.change(() => {
-                this.save_sign()
-            });
-            this.empty_sign = $signature.jSignature("getData",
-                'image');
-        })
+        this.notification = useService("notification");
+        this.env = useService("env"); // Odoo 16+ for env
     }
 
-    async renderSignature() {
-        var url = this.props.placeholder;
-        if (this.props.record.data.signature && !isBinarySize(this.props.record.data[this.props.name])) {
-            url = 'data:image/png;base64,' + this.props.record.data[this.props.name]
-        } else if (this.props.record?.data?.signature) {
-            this.field = {
-                model: this.props.record.resModel,
-                id: this.props.record.resId,
-                field: this.props.name,
-                filename_field: this.fileName,
-                filename: this.fileName || "",
-                data: isBinarySize(this.props.record.data[this.props.name])
-                    ? null
-                    : this.props.record.data[this.props.name],
-            };
+    get signatureValue() {
+        return this.props.record.data[this.props.name] || null;
+    }
+
+    async updateSignature(signatureData) {
+        await this.props.record.update({ [this.props.name]: signatureData });
+        if (!signatureData) {
+             this.notification.add(this.env._t("Signature cleared."), { type: "info" });
         } else {
-            url = this.placeholder;
-        }
-        if (!this.props.readonly) {
-            $('> img').remove();
-            if (this.props.record.data.signature) {
-                const binary_image = await this.orm.call(this.field.model, 'read', [this.field.id, [this.field.field]],)
-                if (binary_image) {
-                    self.$(".signature").jSignature("clear");
-                    self.$(".signature").jSignature("setData",
-                        'data:image/png;base64,' + binary_image[0].signature);
-                }
-            } else {
-                $('> img').remove();
-                $('.signature > canvas').remove();
-                var sign_options = {
-                    'decor-color': '#D1D0CE',
-                    'color': '#000',
-                    'background-color': '#fff',
-                    'height': '150',
-                    'width': '550',
-                };
-            }
-        } else if (this.mode === 'create') {
-            $('> img').remove();
-            $('> canvas').remove();
-            if (!this.value) {
-                $(".signature").empty().jSignature("init", {
-                    'decor-color': '#D1D0CE',
-                    'color': '#000',
-                    'background-color': '#fff',
-                    'height': '150',
-                    'width': '550',
-                });
-            }
+             // For Odoo 17, no explicit save message is usually needed as it's reactive
+             // this.notification.add(this.env._t("Signature updated."), { type: "success" });
         }
     }
-
-    save_sign() {
-        var self = this;
-        $('> img').remove();
-        var signature = $(".signature").jSignature("getData", 'image');
-        var is_empty = signature ?
-            self.empty_sign[1] === signature[1] :
-            false;
-        if (!is_empty && typeof signature !== "undefined" && signature[1]) {
-            const changes = { [this.props.name]: signature[1] || false };
-            this.props.record.update(changes);
-        }
-    }
-
-    sign_clean() {
-        $(".signature > canvas").remove();
-        $('> img').remove();
-        $(".signature").attr("tabindex", "0");
-        var sign_options = {
-            'decor-color': '#D1D0CE',
-            'color': '#000',
-            'background-color': '#fff',
-            'height': '150',
-            'width': '550',
-            'clear': true,
-        };
-        $(".signature").jSignature(sign_options);
-        $(".signature").focus();
-    }
-
 }
-FieldSignature.template = "web_digital_sign.FieldSignature";
 
-registry.category("fields").add("digital_signature", FieldSignature);
+SignatureField.props = {
+    ...binaryField.props,
+};
+
+registry.category("fields").add("digital_signature", SignatureField);
+
+// The XML template for SignatureField itself (web_digital_sign.SignatureField)
+// should be created in an XML file and included in assets.
+// Example: addons/extra/web_digital_sign/static/src/components/digital_signature/digital_signature_field.xml
+// Content for digital_signature_field.xml:
+/*
+<templates xml:space="preserve">
+    <t t-name="web_digital_sign.SignatureField" owl="1">
+        <DigitalSignature
+            value="signatureValue"
+            readonly="props.readonly"
+            update="(data) => this.updateSignature(data)"
+        />
+    </t>
+</templates>
+*/

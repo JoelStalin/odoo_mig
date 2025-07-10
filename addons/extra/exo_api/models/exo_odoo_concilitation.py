@@ -180,10 +180,24 @@ class ExoOdooConciliation(models.Model):
                 )
             """
         try:
-            # Ejecutar la consulta
-            self._cr.execute(query)
+            if not only_duplicated:
+                self.search([]).unlink()
+            else:
+                # Optimized approach to find and unlink duplicates
+                self.env.cr.execute("""
+                    DELETE FROM exo_odoo_conciliation
+                    WHERE id NOT IN (
+                        SELECT MIN(id)
+                        FROM exo_odoo_conciliation
+                        GROUP BY load_id
+                    );
+                """)
+                # Invalidate cache for the model
+                self.invalidate_model(['load_id'])
+
         except Exception as e:
-            raise ValidationError(f"No se pudo eliminar registros duplicados: {e}")
+            _logger.error(f"Error removing conciliation records: {e}")
+            raise ValidationError(f"No se pudo procesar la eliminación de registros de conciliación: {e}")
     
 
     def create_many_records(self, load_batched):
@@ -208,24 +222,27 @@ class ExoOdooConciliation(models.Model):
             WHERE LEFT(load_id, 24) NOT IN (SELECT LEFT(load_id, 24) FROM exo_odoo_conciliation)
         """
         try:
-            # Ejecutar la consulta
+            # Direct SQL read for performance/complexity of subquery.
+            # This should be reviewed if access rights or other ORM benefits become critical here.
             self._cr.execute(query)
             result = self._cr.fetchall()
             data = [{'load_id': row[0], 'load_number': row[1], 'shipper': row[2]} for row in result]
             load_records = [{'load_id': line.get('load_id'), 'load_number': line.get('load_number'),'shipper': line.get('shipper'), 'companyTransporter': None, 'createdAt': None, 'load_status': None  } for line in data]
-            http.request.env['exo.odoo.conciliation'].sudo().create(load_records)
+            if load_records:
+                self.env['exo.odoo.conciliation'].sudo().create(load_records)
             
-            http.request.env['account.load.error'].sudo().with_company(http.request.env.company).create({
-                'name': f"EXO Conciliacion",
-                'account_load_client_id': http.request.env.user.partner_id.id,
+            self.env['account.load.error'].sudo().with_company(self.env.company).create({
+                'name': f"EXO Conciliacion - Odoo Loads not in EXO",
+                'account_load_client_id': self.env.user.partner_id.id,
                 'partner_type': 'Interno',
                 'start_date': datetime.now(),
                 'end_date': datetime.now(),
-                'message_error': "Identificando Cargas que estan en odoo que no estan en EXO",
+                'message_error': f"Found {len(load_records)} Odoo loads not present in EXO conciliation table.",
                 'current_date': datetime.now(),
                 'state': 'draft'
             })
-            http.request.env.cr.commit()
+            self.env.cr.commit()
                 
         except Exception as e:
-            raise ValidationError(f"No se pudo eliminar registros duplicados: {e}")
+            _logger.error(f"Error getting Odoo loads not in EXO: {e}")
+            raise ValidationError(f"No se pudo obtener las cargas de Odoo no presentes en la conciliación de EXO: {e}")

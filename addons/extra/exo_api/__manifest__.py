@@ -1,6 +1,6 @@
 {
     "name": "API",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "sequence": 2,
     "author": "Emy Saul Soto. <emysaul@hotmail.es>",
     "summary": "Este modulo agrega la posibilidad de crear factura a traves de un API",
