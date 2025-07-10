@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record model="ir.actions.act_window" id="action_show_benefits_and_discounts">
+      <field name="name">Beneficios y Descuentos</field>
+      <field name="res_model">benefit.discount</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_show_unique_benefit_discounts">
+      <field name="name">Beneficios y Descuentos de un único uso</field>
+      <field name="res_model">unique.benefit.discount</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_show_partner_benefit_discount">
+      <field name="name">Beneficios Mensuales de un cliente</field>
+      <field name="res_model">partner.benefit.discount</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="action_show_partner_benefit_discount_transaction">
+      <field name="name">Detalle transaciones de descuentos </field>
+      <field name="res_model">unique.benefit.transaction</field>
+      <field name="view_mode">tree</field>
+    </record>
+    <record model="ir.actions.act_window" id="action_show_discount_carrier">
+      <field name="name">Descuentos por Transportista</field>
+      <field name="res_model">discount.carrier</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <record model="ir.actions.act_window" id="action_show_discount_parameters">
+      <field name="name">Parámetros de Descuento</field>
+      <field name="res_model">discount.parameters</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem name="Beneficios y Descuentos" id="benefits_and_discounts"
+      sequence="1" />
+
+
+    <menuitem id="exo_sub_menu_unique_benefit_discounts"
+      parent="benefits_and_discounts"
+      action="action_show_unique_benefit_discounts"
+     />
+
+
+    <menuitem id="exo_sub_menu_partner_benefit_discount"
+      parent="benefits_and_discounts"
+      action="action_show_partner_benefit_discount" />
+
+
+    <menuitem id="exo_sub_menu_benefits_and_discounts"
+      parent="benefits_and_discounts"
+      action="action_show_benefits_and_discounts" />
+
+    <menuitem id="exo_sub_menu_partner_benefit_discount_transaction"
+      parent="benefits_and_discounts"
+      action="action_show_partner_benefit_discount_transaction" />   
+    
+      <menuitem id="menu_unique_benefit_discounts"
+                  parent="exo_api.exo_sub_menu_unique_benefit_discounts"
+                  action="action_show_unique_benefit_discounts"  
+                  sequence="1"/> 
+
+      <menuitem id="menu_unique_benefit_discount_wizard"
+                  parent="exo_api.exo_sub_menu_unique_benefit_discounts"
+                  action="action_unique_benefit_discount_wizard" 
+                  sequence="2"/> 
+      
+      <menuitem id="menu_dicount_carrier"
+                  parent="benefits_and_discounts"
+                  action="action_show_discount_carrier" 
+                  sequence="2" /> 
+      
+      <menuitem id="menu_discount_parameteres"
+                  parent="benefits_and_discounts"
+                  action="action_show_discount_parameters" 
+                  sequence="3" /> 
+        
+      
+        
+
+  </data>
+</odoo>

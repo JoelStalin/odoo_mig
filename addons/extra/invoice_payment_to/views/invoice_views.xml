@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inherit_account_invoice_payment_to" model="ir.ui.view">
+            <field name="name">account.move.form.inherit.payment.to</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//page[@id='other_tab']//group[@id='other_tab_group']" position="inside">
+                    <group string="Pagos">
+                        <field name="payment_to" attrs="{'invisible': [('move_type', '!=', 'in_invoice')]}" />
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

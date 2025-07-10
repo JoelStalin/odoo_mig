@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_set_exo_load" model="ir.actions.server">
+            <field name="name">Establecer Transporter Id desde EXO</field>
+            <field name="model_id" ref="model_res_partner" />
+            <field name="binding_model_id" ref="model_res_partner" />
+            <field name="state">code</field>
+            <field name="code">
+                if records: action = records.set_exo_transporters()
+            </field>
+        </record>
+
+        <record id="view_partner_property_form" model="ir.ui.view">
+            <field name="name">res.partner.property.tag.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="priority">5</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat']" position="attributes">
+                    <attribute name="required">True</attribute>
+                </xpath>
+                <page name="internal_notes" position="after">
+                    <page string="Tags" name="partner_analityc_tags">
+                        <field name="analytic_tag_ids" nolabel="1">
+                            <tree editable="bottom">
+                                <field name="analytic_tag_id" />
+                            </tree>
+                        </field>
+                    </page>
+                </page>
+                <field name="vat" position="after">
+                    <field name="document_type" />
+
+                    <field name="bank_account_ids" context="{'default_partner_id': active_id}">
+                        <tree editable="bottom">
+                            <field name="bank_code"/>
+                            <field name="account_number"/>
+                            <field name="acc_holder_name"/>
+                            <field name="active"/>
+                        </tree>
+                        <form>
+                            <group>
+                                <field name="bank_code"/>
+                                <field name="swift_code"/>
+                                <field name="bank_name"/>
+                            </group>
+                            <group>
+                                <field name="account_number"/>
+                                <field name="acc_holder_name"/>
+                                <field name="account_type"/>
+                                <field name="transfer_type"/>
+                                <field name="active"/>
+                            </group>
+                        </form>
+                    </field>
+
+                </field>
+
+
+                <field name="company_id" position="attributes">
+                    <attribute name="required">True</attribute>
+                </field>
+
+                <field name="property_supplier_payment_term_id" position="attributes">
+                    <attribute name="required">True</attribute>
+                </field>
+
+                <field name="category_id" position="after">
+                    <field force_save="1" name="internal_partner_type" required="1" />
+                    <field force_save="1" name="load_payment_term_id" required="1" />
+                    <field force_save="1" name="search_by_warehouse" />
+                    <field force_save="1" name="group_by_warehouse" />
+
+                    <field force_save="1" name="create_by_automatic_load" groups="exo_api.group_edit_configuration" />
+                    <field force_save="1" name="insurance_percent" groups="exo_api.group_edit_configuration" />
+                    <field force_save="1" name="apply_other_deductions" groups="exo_api.group_edit_configuration" />
+                    <field force_save="1" name="in_transporter_show_order_num" groups="exo_api.group_edit_configuration" />
+                    <field force_save="1" name="invoice_price_formula" groups="exo_api.group_edit_configuration" />
+                    <field force_save="1" name="bill_price_formula" groups="exo_api.group_edit_configuration" />
+                    <field force_save="1" name="group_by_payment_term" groups="exo_api.group_edit_configuration" />
+                    <field force_save="1" name="transform_vehicle_type" groups="exo_api.group_edit_configuration" />
+                    <field force_save="1" name="group_account_line_by_order" groups="exo_api.group_edit_configuration" />
+
+                    <field force_save="1" name="rounded_money" groups="exo_api.group_edit_configuration" />
+                    <field force_save="1" name="exo_load_start_date" groups="exo_api.group_edit_configuration" />
+                    <field force_save="1" name="load_statuses" groups="exo_api.group_edit_configuration" />
+                    <field force_save="1" name="benefit_discount_ids" groups="exo_api.group_edit_configuration" />
+                    <field force_save="1" name="templates_load_files" groups="exo_api.group_edit_configuration" />
+                    <field force_save="1" name="tax_products" groups="exo_api.group_edit_configuration" />
+                    <field force_save="1" name="last_payment_id" readonly="1" groups="exo_api.group_edit_configuration" />
+                </field>
+                <notebook>
+
+                    <page string="Configuracion adicional" name="additional_configurations">
+                        <group>
+                            <field name="partner_object_ids" />
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+    </data>
+</odoo>

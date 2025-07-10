@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record model="ir.actions.act_window" id="action_show_template_load_file_property">
+      <field name="name">Plantilla para exportar las cargas de EXO</field>
+      <field name="res_model">template.load.file.property</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_show_load_file_property">
+      <field name="name">Propiedades de la Plantilla para exportar las cargas de EXO</field>
+      <field name="res_model">load.file.property</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Menu -->
+    <menuitem name="Plantilla para exportar las cargas de EXO" id="template_load_file_property"
+      sequence="1" />
+    <menuitem id="exo_sub_menu_template_load_file_property"
+      parent="template_load_file_property"
+      action="action_show_template_load_file_property" />
+
+    <menuitem id="exo_sub_menu_load_file_property"
+      parent="template_load_file_property"
+      action="action_show_load_file_property" />
+  </data>
+</odoo>

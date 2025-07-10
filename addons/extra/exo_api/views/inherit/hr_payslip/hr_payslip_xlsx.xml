@@ -1,0 +1,11 @@
+<odoo>
+    <record id="hr_payslip_line_xlsx" model="ir.actions.report">
+        <field name="name">Exportar Calculo Salarial</field>
+        <field name="model">hr.payslip.line</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">exo_api.report_payslip_name</field>
+        <field name="report_file">exo_api.report_payslip_name</field>
+        <field name="binding_model_id" ref="hr_payroll.model_hr_payslip_line" />
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

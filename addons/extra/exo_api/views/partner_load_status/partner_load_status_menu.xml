@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record model="ir.actions.act_window" id="action_show_partner_load_status">
+      <field name="name">Estados a Filtrar Cargas de EXO</field>
+      <field name="res_model">partner.load.status</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Menu -->
+    <menuitem name="Estados a Filtrar Cargas de EXO" id="partner_load_status"
+      sequence="1" />
+    <menuitem id="exo_sub_menu_partner_load_status"
+      parent="partner_load_status"
+      action="action_show_partner_load_status" />
+  </data>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_company_property_form_inherit" model="ir.ui.view">
+            <field name="name">res.company.form.inherit</field>
+            <field name="model">res.company</field>
+            <field name="priority">5</field>
+            <field name="inherit_id" ref="base.view_company_form" />
+            <field name="arch" type="xml">
+                <field name="parent_id" position="after">
+                    <field name="code" />
+                    <field name="default_image" widget="image" class="oe_avatar" />
+                    <field name="company_managers" widget="many2many_tags" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tree grocery store-->
+        <record id='exo_odoo_conciliation_tree_view' model='ir.ui.view'>
+            <field name='name'>exo.odoo.conciliation.tree.view</field>
+            <field name='model'>exo.odoo.conciliation</field>
+            <field name='arch' type='xml'>
+                <tree string='Listado de Conciliacion entre EXO y Odoo'>
+                    <field name='load_id' />
+                    <field name='load_number' />
+                    <field name='shipper' />
+                    <field name='companyTransporter' />
+                    <field name='createdAt' />
+                    <field name='load_status' />
+                    <field name='shipper_load_status' />
+                    <field name='provider_load_status' />
+                    <field name='provider_account_line_load_id' />
+                    <field name='shipper_account_line_load_id' />
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Search grocery store-->
+        <record id="exo_odoo_conciliation_search_view" model="ir.ui.view">
+            <field name="name">exo.odoo.conciliation.search.view</field>
+            <field name="model">exo.odoo.conciliation</field>
+            <field name="arch" type="xml">
+                <search string="Busqueda">
+                    <field name='load_id' />
+                    <field name='load_number' />
+                    <field name='shipper' />
+                    <field name='companyTransporter' />
+                    <field name='createdAt' />
+                    <field name='load_status' />
+                    <field name='shipper_account_line_load_id' />
+                    <field name='provider_account_line_load_id' />
+                    <field name='shipper_load_status' />
+                    <field name='provider_load_status' />
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

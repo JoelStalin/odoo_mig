@@ -1,0 +1,9 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Grupo personalizado -->
+        <record id="group_bank_account_manager" model="res.groups">
+            <field name="name">Gestor de Cuentas Bancarias</field>
+            <field name="category_id" ref="base.module_category_accounting"/>
+        </record>
+    </data>
+</odoo>

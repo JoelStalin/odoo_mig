@@ -1,0 +1,10 @@
+pypeg2
+js2py
+psycopg2
+pq
+telnyx
+six
+pycountry
+openpyxl
+reportlab
+selectolax

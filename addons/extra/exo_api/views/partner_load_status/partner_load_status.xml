@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Conduces -->
+        <record id='partner_load_status_form_wiew' model='ir.ui.view'>
+            <field name='name'>partner.load.status.form.view</field>
+            <field name='model'>partner.load.status</field>
+            <field name='arch' type='xml'>
+                <form string='Estado a Filtrar para Cargas de EXO'>
+                    <sheet>
+                        <group>
+                            <field name='key' />
+                            <field name='name' />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree grocery store-->
+        <record id='partner_load_status_tree_view' model='ir.ui.view'>
+            <field name='name'>partner.load.status.tree.view</field>
+            <field name='model'>partner.load.status</field>
+            <field name='arch' type='xml'>
+                <tree string='Listado de Estados a Filtrar para las Cargas de EXO'>
+                    <field name='key' />
+                    <field name='name' />
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Search grocery store-->
+        <record id="partner_load_status_search_view" model="ir.ui.view">
+            <field name="name">partner.load.status.search.view</field>
+            <field name="model">partner.load.status</field>
+            <field name="arch" type="xml">
+                <search string="Busqueda">
+                    <field name='key' />
+                    <field name='name' />
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

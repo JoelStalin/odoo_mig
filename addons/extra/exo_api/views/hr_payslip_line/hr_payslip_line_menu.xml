@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record model="ir.actions.act_window" id="action_show_salary_line">
+      <field name="name">Calculos de Salarios</field>
+      <field name="res_model">hr.payslip.line</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Menu -->
+    <menuitem name="Calculos de Salarios" id="exo_menu_salary_line" sequence="4" />
+    <menuitem id="exo_sub_menu_salary_line" parent="exo_menu_salary_line"
+      action="action_show_salary_line" />
+  </data>
+</odoo>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <!-- Tree grocery store-->
+        <record id='partner_benefit_discount_tree_view' model='ir.ui.view'>
+            <field name='name'>partner.benefit.discount.tree.view</field>
+            <field name='model'>partner.benefit.discount</field>
+            <field name='arch' type='xml'>
+                <tree string='Listado de Beneficios y Descuentos de un cliente'>
+                    <field name='name' />
+                    <field name='field_test' />
+                    <field name='partner_id' />
+                    <field name='benefit_discount_id' />
+                    <field name='product_quantity' />
+                    <field name='analytic_account_id' />
+                    <field name='analytic_tag_ids' />
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Conduces -->
+        <record id='benefit_discount_form_wiew' model='ir.ui.view'>
+            <field name='name'>benefit.discount.form.view</field>
+            <field name='model'>benefit.discount</field>
+            <field name='arch' type='xml'>
+                <form string='Beneficios y Descuentos'>
+                    <sheet>
+                        <group>
+                            <field name='name' />
+                            <field name='origin' />
+                            <field name='product_tmpl_id' />
+                            <field name='benefit_discount_cicles_ids' />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Tree grocery store-->
+        <record id='benefit_discount_tree_view' model='ir.ui.view'>
+            <field name='name'>benefit.discount.tree.view</field>
+            <field name='model'>benefit.discount</field>
+            <field name='arch' type='xml'>
+                <tree string='Listado de Beneficios y Descuentos'>
+                    <field name='name' />
+                    <field name='origin' />
+                    <field name='product_tmpl_id' />
+                    <field name='benefit_discount_cicles_ids' />
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Search grocery store-->
+        <record id="benefit_discount_search_view" model="ir.ui.view">
+            <field name="name">benefit.discount.search.view</field>
+            <field name="model">benefit.discount</field>
+            <field name="arch" type="xml">
+                <search string="Busqueda">
+                    <field name='name' />
+                    <field name='origin' />
+                    <field name='product_tmpl_id' />
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

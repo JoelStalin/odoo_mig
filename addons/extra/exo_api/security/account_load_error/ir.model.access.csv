@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_exo_configuration_exo_configuration_account_load_error,exo_configuration.exo_configuration_account_load_error,exo_api.model_account_load_error,base.group_user,1,1,0,1
+access_exo_configuration_exo_configuration_account_load_error_admin,exo_configuration.exo_configuration_account_load_error_admin,exo_api.model_account_load_error,base.group_system,1,1,1,1

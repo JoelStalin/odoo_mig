@@ -1,0 +1,54 @@
+# Deploys
+stages:
+  - prod-deploy
+  - qa-deploy # 34.194.208.11
+qa-deploy:
+  stage: qa-deploy
+  image: alpine:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH != "main"' 
+  
+  before_script:
+    - command -v ssh-agent >/dev/null || ( apk add --update openssh )
+    - apk update && apk add openssh-client rsync
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $QA_CONT_EC2_IPADDRESS >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - mkdir .odoo-docker
+    - cp -r * .odoo-docker
+    - mv .odoo-docker odoo-docker
+    - ssh -o StrictHostKeyChecking=no ubuntu@$QA_CONT_EC2_IPADDRESS "sudo rm -rf /home/ubuntu/contability/*;"
+    - ssh -o StrictHostKeyChecking=no ubuntu@$QA_CONT_EC2_IPADDRESS "sudo rm -rf /opt/odoo-docker/addons/extra/*;"
+    - rsync -a -r odoo-docker/addons/extra/* ubuntu@$QA_CONT_EC2_IPADDRESS:/home/ubuntu/contability/
+    - ssh -o StrictHostKeyChecking=no ubuntu@$QA_CONT_EC2_IPADDRESS "sudo cp -R /home/ubuntu/contability/* /opt/odoo-docker/addons/extra/;"
+    - ssh -o StrictHostKeyChecking=no ubuntu@$QA_CONT_EC2_IPADDRESS "cd /opt/odoo-docker/addons/; docker-compose restart;"
+
+prod-deploy:
+  stage: prod-deploy
+  image: alpine:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"' 
+
+  before_script:
+    - command -v ssh-agent >/dev/null || ( apk add --update openssh )
+    - apk update && apk add openssh-client rsync
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $PROD_CONT_EC2_IPADDRESS >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+  script:
+    - mkdir .odoo-docker
+    - cp -r * .odoo-docker
+    - mv .odoo-docker odoo-docker
+    - ssh -o StrictHostKeyChecking=no ubuntu@$PROD_CONT_EC2_IPADDRESS "sudo rm -rf /home/ubuntu/contability/*;"
+    - ssh -o StrictHostKeyChecking=no ubuntu@$PROD_CONT_EC2_IPADDRESS "sudo rm -rf /opt/odoo-docker/addons/extra/*;"
+    - rsync -a -r odoo-docker/addons/extra/* ubuntu@$PROD_CONT_EC2_IPADDRESS:/home/ubuntu/contability/
+    - ssh -o StrictHostKeyChecking=no ubuntu@$PROD_CONT_EC2_IPADDRESS "sudo cp -R /home/ubuntu/contability/* /opt/odoo-docker/addons/extra/;"
+    - ssh -o StrictHostKeyChecking=no ubuntu@$PROD_CONT_EC2_IPADDRESS "cd /opt/odoo-docker/addons/; docker-compose restart;"

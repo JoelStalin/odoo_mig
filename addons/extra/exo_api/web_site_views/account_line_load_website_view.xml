@@ -1,0 +1,26 @@
+<odoo>
+    <template id="public_account_line_load_template">
+        <t t-call="website.layout">
+            <div class="container">
+                <h2>Cargas Pendientes</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Carga</th>
+                            <th>Fecha esperada para poder facturar</th>
+                            <th>Monto Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="line_loads" t-as="load">
+                            <tr>
+                                <td><t t-esc="load.load_number"/></td>
+                                <td><t t-esc="load.block_date_end"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

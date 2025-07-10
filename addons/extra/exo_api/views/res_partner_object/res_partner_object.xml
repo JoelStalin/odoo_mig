@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Id Objectos en EXO -->
+        <record id='res_partner_object_form_wiew' model='ir.ui.view'>
+            <field name='name'>res.partner.object.form.view</field>
+            <field name='model'>res.partner.object</field>
+            <field name='arch' type='xml'>
+                <form string='Id Objectos en EXO de un cliente'>
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                            attrs="{'invisible': [('active', '=', True)]}" />
+                        <group>
+                            <field name="partner_id" readonly="0" />
+                            <field name="name" />
+                            <field name="description" />
+                            <field name="active" invisible="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree grocery store-->
+        <record id='res_partner_object_tree_view' model='ir.ui.view'>
+            <field name='name'>res.partner.object.tree.view</field>
+            <field name='model'>res.partner.object</field>
+            <field name='arch' type='xml'>
+                <tree string='Listado de Id Objectos en EXO de los cliente'>
+                    <field name="partner_id" />
+                    <field name="name" />
+                    <field name="description" />
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Search grocery store-->
+        <record id="res_partner_object_search_view" model="ir.ui.view">
+            <field name="name">res.partner.object.search.view</field>
+            <field name="model">res.partner.object</field>
+            <field name="arch" type="xml">
+                <search string="Busqueda">
+                    <field name="partner_id" />
+                    <field name="name" />
+                    <field name="description" />
+                    <separator />
+                    <filter name="archived" string="Archived" domain="[('active', '=', False)]" />
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

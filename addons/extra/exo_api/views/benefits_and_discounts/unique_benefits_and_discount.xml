@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form View -->
+        <record id='unique_benefit_discount_form_wiew' model='ir.ui.view'>
+            <field name='name'>unique.benefit.discount.form.view</field>
+            <field name='model'>unique.benefit.discount</field>
+            <field name='arch' type='xml'>
+                <form string='Beneficios y Descuentos de un solo uso'>
+                    <sheet>
+                        <group>
+                            <field name='name' attrs="{'readonly': [('move_line_id', '!=', False)]}" />
+                            <field name='partner_id' attrs="{'readonly': [('move_line_id', '!=', False)]}" />
+                            <field name='product_tmpl_id' attrs="{'readonly': [('move_line_id', '!=', False)]}" />
+                            <field name='amount'/>
+                            <field name='product_quantity'/>
+                            <field name='transaction_type' attrs="{'readonly': [('move_line_id', '!=', False)]}" />
+                            <field name='transaction_date'/>
+                            <field name='analytic_account_id' attrs="{'readonly': [('move_line_id', '!=', False)]}" />
+                            <field name='move_line_id' readonly="1"/>
+                            <field name='invoice_date' readonly="1"/>
+                            <field name='load_id'/>
+                            <field name='transaction_ids' readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id='unique_benefit_discount_tree_view' model='ir.ui.view'>
+            <field name='name'>unique.benefit.discount.tree.view</field>
+            <field name='model'>unique.benefit.discount</field>
+            <field name='arch' type='xml'>
+                <tree string='Listado de Beneficios y Descuentos de un solo uso'>
+                    <field name='name'/>
+                    <field name='partner_id'/>
+                    <field name='product_tmpl_id'/>
+                    <field name='product_quantity'/>
+                    <field name='amount'/>
+                    <field name='transaction_type'/>
+                    <field name='analytic_account_id'/>
+                    <field name='move_line_id'/>
+                    <field name='invoice_date'/>
+                    <field name='load_id'/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <!-- <record id="unique_benefit_discount_search_view" model="ir.ui.view">
+            <field name="name">unique.benefit.discount.search.view</field>
+            <field name="model">unique.benefit.discount</field>
+            <field name="arch" type="xml">
+                <search string="Búsqueda">
+                    <field name='name'/>
+                    <field name='partner_id'/>
+                    <field name='product_tmpl_id'/>
+                    <field name='product_quantity'/>
+                    <field name='amount'/>
+                    <field name='transaction_type'/>
+                    <field name='analytic_account_id'/>
+                    <field name='move_line_id'/>
+                    <field name='invoice_date'/>
+                    <field name='load_id'/>
+                    <filter string="Con Factura" domain="[('invoice_date','!=',False)]"/>
+                </search>
+            </field>
+        </record> -->
+        <record id="unique_benefit_discount_search_view" model="ir.ui.view">
+            <field name="name">unique.benefit.discount.search.view</field>
+            <field name="model">unique.benefit.discount</field>
+            <field name="arch" type="xml">
+                <search string="Búsqueda">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Conduces -->
+        <record id="view_unique_benefit_discount_wizard_form" model="ir.ui.view">
+            <field name="name">unique.benefit.discount.wizard.form</field>
+            <field name="model">unique.benefit.discount.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Unique Benefit Discount">
+                    <group>
+                        <field name="start_date" />
+                        <field name="end_date" />
+                    </group>
+                    <footer>
+                        <button string="Fetch Transactions" type="object" name="fetch_and_process_transactions" class="oe_highlight"/>
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Acción de ventana para el wizard -->
+        <record id="action_unique_benefit_discount_wizard" model="ir.actions.act_window">
+            <field name="name">Aplica descuento transaciones Shell</field>
+            <field name="res_model">unique.benefit.discount.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_unique_benefit_discount_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <!-- Acción de Server -->
+        <record id="action_mark_as_checked_server" model="ir.actions.server">
+            <field name="name">Marcar como Aprobado</field>
+            <field name="model_id" ref="model_unique_benefit_discount"/>
+            <field name="binding_model_id" ref="model_unique_benefit_discount"/>
+            <field name="binding_type">action</field>
+            <field name="state">code</field>
+            <field name="code"><![CDATA[ if records: records.action_mark_as_checked() ]]>
+            </field>
+        </record>
+        
+
+
+
+      
+    </data>
+</odoo>

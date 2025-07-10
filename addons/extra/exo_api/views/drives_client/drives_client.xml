@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id='drive_item_form_wiew' model='ir.ui.view'>
+            <field name='name'>drive.item.form.view</field>
+            <field name='model'>drive.item</field>
+            <field name='arch' type='xml'>
+                <form string='Linea de Conduces'>
+                    <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                        <group>
+                            <field name="name" />
+                            <field name='drives_client_id' />
+                            <field name="active" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="drive_item_search_view" model="ir.ui.view">
+            <field name="name">drive.item.search.view</field>
+            <field name="model">drive.item</field>
+            <field name="arch" type="xml">
+                <search string="Busqueda">
+                    <field name="name" />
+                    <field name='drives_client_id' />
+                    <field name="active" />
+                    <separator/>
+                    <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+
+
+        <!-- Conduces -->
+        <record id='drives_client_form_wiew' model='ir.ui.view'>
+            <field name='name'>drives.client.form.view</field>
+            <field name='model'>drives.client</field>
+            <field name='arch' type='xml'>
+                <form string='Conduces de un cliente'>
+                    <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                        <group>
+                            <field name="active" />
+                            <field name='partner_id' />
+                            <field name='drives' widget="many2many_tags" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree grocery store-->
+        <record id='drives_client_tree_view' model='ir.ui.view'>
+            <field name='name'>drives.client.tree.view</field>
+            <field name='model'>drives.client</field>
+            <field name='arch' type='xml'>
+                <tree string='Listado de Conduces de los cliente'>
+                    <field name='partner_id' />
+                    <field name='drives' />
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Search grocery store-->
+        <record id="drives_client_search_view" model="ir.ui.view">
+            <field name="name">drives.client.search.view</field>
+            <field name="model">drives.client</field>
+            <field name="arch" type="xml">
+                <search string="Busqueda">
+                    <field name='partner_id' />
+                    <field name='drives' />
+                    <separator/>
+                    <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

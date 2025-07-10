@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <report
+            id="excel_transaction_bhd"
+            model="account.batch.payment"
+            string="Transaciones BHD"
+            report_type="xlsx"
+            name="exo_api.excel_transaction_bhd"
+            file="exo_api.excel_transaction_bhd"
+            />
+        
+
+    </data>
+</odoo>

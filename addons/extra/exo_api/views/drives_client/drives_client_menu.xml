@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record model="ir.actions.act_window" id="action_show_drives_client">
+      <field name="name">Conduces de un cliente</field>
+      <field name="res_model">drives.client</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+     <record model="ir.actions.act_window" id="action_show_drive_item">
+      <field name="name">Lineas del Conduces de los cliente</field>
+      <field name="res_model">drive.item</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Menu -->
+    <menuitem name="Conduces de un cliente" id="drives_client"
+      sequence="1" />
+    <menuitem id="exo_sub_menu_drives_client" name="Conduces"
+      parent="drives_client"
+      action="action_show_drives_client" />
+
+       <menuitem id="exo_sub_menu_drive_item" name="Lineas de Conduces"
+      parent="drives_client"
+      action="action_show_drive_item" />
+  </data>
+</odoo>

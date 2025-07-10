@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Conduces -->
+        <record id='template_load_file_property_form_wiew' model='ir.ui.view'>
+            <field name='name'>template.load.file.property.form.view</field>
+            <field name='model'>template.load.file.property</field>
+            <field name='arch' type='xml'>
+                <form string='Plantilla para exportar las cargas de EXO'>
+                    <header>
+                        <button string="Descargar Archivos de Prueba" type="object"
+                            class="oe_highlight"
+                            name="get_template_file" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name='name' />
+                            <field name='type' />
+                            <field name='pdf_page_size' />
+                            <field name='is_internal' />
+                            <field name='pdf_font_size' />
+                            <field name='load_file_property' />
+                            <field name='file' widget="binary" />
+                            <field name='apply_for_all_shippers' />
+                            <field name='apply_for_all_providers' />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree grocery store-->
+        <record id='template_load_file_property_tree_view' model='ir.ui.view'>
+            <field name='name'>template.load.file.property.tree.view</field>
+            <field name='model'>template.load.file.property</field>
+            <field name='arch' type='xml'>
+                <tree string='Listado de Plantillas para exportar las cargas de EXO'>
+                    <field name='name' />
+                    <field name='type' />
+                    <field name='pdf_page_size' />
+                    <field name='is_internal' />
+                    <field name='pdf_font_size' />
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Search grocery store-->
+        <record id="template_load_file_property_search_view" model="ir.ui.view">
+            <field name="name">template.load.file.property.search.view</field>
+            <field name="model">template.load.file.property</field>
+            <field name="arch" type="xml">
+                <search string="Busqueda">
+                    <field name='name' />
+                    <field name='type' />
+                    <field name='pdf_page_size' />
+                    <field name='is_internal' />
+                    <field name='pdf_font_size' />
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

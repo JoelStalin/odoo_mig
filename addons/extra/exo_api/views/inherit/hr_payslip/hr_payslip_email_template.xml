@@ -1,0 +1,122 @@
+<table border="0" cellpadding="0" cellspacing="0"
+    style="box-sizing:border-box;border-collapse:collapse;width:100%; margin:0px auto;" width="100%">
+    <tbody>
+        <tr>
+            <td valign="top" style="text-align: left; font-size: 14px;">
+                <div class="row" style="margin:0 -16px 0 -16px;box-sizing:border-box;">
+                    <div class="col-12"
+                        style="padding:0 16px 0 16px;box-sizing:border-box;max-width:100%;width:100%;position:relative;"
+                        width="100%">
+                        <br>
+                        <h1
+                            style="margin:0px 0 6px 0;box-sizing:border-box;font-size:31.2px;color:#091124;line-height:1.2;font-weight:500;">
+                            <t t-esc="object.name" data-oe-t-inline="true" contenteditable="false"></t>
+                        </h1>
+                        <br>
+                        <h5
+                            style="margin:0px 0 6px 0;box-sizing:border-box;font-size:14.3px;color:#091124;line-height:1.2;font-weight:500;">
+                            Periodo:
+                            <t t-esc="object.date_from"
+                                data-oe-t-inline="true" contenteditable="false">
+                            </t> - <t t-esc="object.date_to"
+                                data-oe-t-inline="true" contenteditable="false"></t>
+                        </h5>
+                        <br>
+                    </div>
+                </div>
+
+
+                <div class="row" style="margin:0 -16px 0 -16px;box-sizing:border-box;">
+                    <div class="col-12"
+                        style="padding:0 16px 0 16px;box-sizing:border-box;max-width:100%;width:100%;position:relative;"
+                        width="100%">
+                        <br>
+                        <h3
+                            style="margin:0px 0 6px 0;box-sizing:border-box;font-size:16.9px;color:#091124;line-height:1.2;font-weight:500;">Estimado
+                            Colaborador, a continuación remitimos el volante de su pago de nómina
+                            con el siguiente detalle:</h3>
+                        <br>
+                    </div>
+                </div>
+                <div class="row" style="margin:0 -16px 0 -16px;box-sizing:border-box;">
+                    <div class="col-12"
+                        style="padding:0 16px 0 16px;box-sizing:border-box;max-width:100%;width:100%;position:relative;"
+                        width="100%">
+                        <table class="table table-bordered"
+                            style="border-style:solid;margin:0 0 12px 0;box-sizing:border-box;border-left-color:#e0e2e6;border-bottom-color:#e0e2e6;border-right-color:#e0e2e6;border-top-color:#e0e2e6;border-left-width:1px;border-bottom-width:1px;border-right-width:1px;border-top-width:1px;color:#444b5a;width:100%;border-collapse:collapse;table-layout: fixed"
+                            id="hash_config_table" width="100%">
+                            <thead style="display: table-row-group">
+                                <tr>
+                                    <th class="text-center"
+                                        style="border-style:solid;padding:9px;box-sizing:border-box;border-left-color:#e0e2e6;border-bottom-color:#e0e2e6;border-right-color:#e0e2e6;border-left-width:1px;border-bottom-width:2px;border-right-width:1px;border-top-color:#e0e2e6;border-top-width:1px;vertical-align:bottom;text-align:center;width: 14%"
+                                        scope="col" width="14%">Nombre</th>
+                                    <th class="text-center"
+                                        style="border-style:solid;padding:9px;box-sizing:border-box;border-left-color:#e0e2e6;border-bottom-color:#e0e2e6;border-right-color:#e0e2e6;border-left-width:1px;border-bottom-width:2px;border-right-width:1px;border-top-color:#e0e2e6;border-top-width:1px;vertical-align:bottom;text-align:center;width: 14%"
+                                        scope="col" width="14%">Categoria</th>
+                                    <th class="text-center"
+                                        style="border-style:solid;padding:9px;box-sizing:border-box;border-left-color:#e0e2e6;border-bottom-color:#e0e2e6;border-right-color:#e0e2e6;border-left-width:1px;border-bottom-width:2px;border-right-width:1px;border-top-color:#e0e2e6;border-top-width:1px;vertical-align:bottom;text-align:center;width: 14%"
+                                        scope="col" width="14%">Cantidad</th>
+                                    <th class="text-center"
+                                        style="border-style:solid;padding:9px;box-sizing:border-box;border-left-color:#e0e2e6;border-bottom-color:#e0e2e6;border-right-color:#e0e2e6;border-left-width:1px;border-bottom-width:2px;border-right-width:1px;border-top-color:#e0e2e6;border-top-width:1px;vertical-align:bottom;text-align:center;width: 14%"
+                                        scope="col" width="14%">Tasa (%)</th>
+                                    <th class="text-center"
+                                        style="border-style:solid;padding:9px;box-sizing:border-box;border-left-color:#e0e2e6;border-bottom-color:#e0e2e6;border-right-color:#e0e2e6;border-left-width:1px;border-bottom-width:2px;border-right-width:1px;border-top-color:#e0e2e6;border-top-width:1px;vertical-align:bottom;text-align:center;width: 14%"
+                                        scope="col" width="14%">Regla</th>
+                                    <th class="text-center"
+                                        style="border-style:solid;padding:9px;box-sizing:border-box;border-left-color:#e0e2e6;border-bottom-color:#e0e2e6;border-right-color:#e0e2e6;border-left-width:1px;border-bottom-width:2px;border-right-width:1px;border-top-color:#e0e2e6;border-top-width:1px;vertical-align:bottom;text-align:center;width: 14%"
+                                        scope="col" width="14%">Importe</th>
+                                    <th class="text-center"
+                                        style="border-style:solid;padding:9px;box-sizing:border-box;border-left-color:#e0e2e6;border-bottom-color:#e0e2e6;border-right-color:#e0e2e6;border-left-width:1px;border-bottom-width:2px;border-right-width:1px;border-top-color:#e0e2e6;border-top-width:1px;vertical-align:bottom;text-align:center;width: 14%"
+                                        scope="col" width="14%">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="object.download_line_ids" t-as="result">
+                                    <tr>
+                                        <td
+                                            style="border-style:solid;padding:9px;box-sizing:border-box;border-left-color:#e0e2e6;border-bottom-color:#e0e2e6;border-right-color:#e0e2e6;border-left-width:1px;border-bottom-width:1px;border-right-width:1px;border-top-color:#e0e2e6;border-top-width:1px;vertical-align:top;">
+                                            <span t-esc="result['name']" contenteditable="false"></span>
+                                        </td>
+                                        <td
+                                            style="border-style:solid;padding:9px;box-sizing:border-box;border-left-color:#e0e2e6;border-bottom-color:#e0e2e6;border-right-color:#e0e2e6;border-left-width:1px;border-bottom-width:1px;border-right-width:1px;border-top-color:#e0e2e6;border-top-width:1px;vertical-align:top;">
+                                            <span t-esc="result['category_id']['name']"
+                                                contenteditable="false"></span>
+                                        </td>
+                                        <td
+                                            style="border-style:solid;padding:9px;box-sizing:border-box;border-left-color:#e0e2e6;border-bottom-color:#e0e2e6;border-right-color:#e0e2e6;border-left-width:1px;border-bottom-width:1px;border-right-width:1px;border-top-color:#e0e2e6;border-top-width:1px;vertical-align:top;">
+                                            <span t-esc="result['quantity']" contenteditable="false"></span>
+                                        </td>
+                                        <td
+                                            style="border-style:solid;padding:9px;box-sizing:border-box;border-left-color:#e0e2e6;border-bottom-color:#e0e2e6;border-right-color:#e0e2e6;border-left-width:1px;border-bottom-width:1px;border-right-width:1px;border-top-color:#e0e2e6;border-top-width:1px;vertical-align:top;">
+                                            <span t-esc="result['rate']" contenteditable="false"></span>
+                                        </td>
+                                        <td
+                                            style="border-style:solid;padding:9px;box-sizing:border-box;border-left-color:#e0e2e6;border-bottom-color:#e0e2e6;border-right-color:#e0e2e6;border-left-width:1px;border-bottom-width:1px;border-right-width:1px;border-top-color:#e0e2e6;border-top-width:1px;vertical-align:top;">
+                                            <span t-esc="result['salary_rule_id']['name']"
+                                                contenteditable="false"></span>
+                                        </td>
+                                        <td
+                                            style="border-style:solid;padding:9px;box-sizing:border-box;border-left-color:#e0e2e6;border-bottom-color:#e0e2e6;border-right-color:#e0e2e6;border-left-width:1px;border-bottom-width:1px;border-right-width:1px;border-top-color:#e0e2e6;border-top-width:1px;vertical-align:top;">
+                                            <span t-esc="result['amount']"
+                                                t-options='{"widget": "float", "precision": 2}'
+                                                contenteditable="false"></span>
+                                        </td>
+                                        <td
+                                            style="border-style:solid;padding:9px;box-sizing:border-box;border-left-color:#e0e2e6;border-bottom-color:#e0e2e6;border-right-color:#e0e2e6;border-left-width:1px;border-bottom-width:1px;border-right-width:1px;border-top-color:#e0e2e6;border-top-width:1px;vertical-align:top;">
+                                            <span t-esc="result['total']"
+                                                t-options='{"widget": "float", "precision": 2}'
+                                                contenteditable="false"></span>
+                                        </td>
+                                    </tr>
+
+                                </t>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br>Cualquier consulta relacionada favor dirigirse al Departamento de Administración.

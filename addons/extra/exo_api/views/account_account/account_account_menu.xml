@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record model="ir.actions.act_window" id="action_show_account_account">
+      <field name="name">Cuentas Contables</field>
+      <field name="res_model">account.account</field>
+      <field name="view_mode">tree</field>
+    </record>
+
+
+    <!-- Menu -->
+    <menuitem name="Cuentas Contables" id="exo_menu_account_account" sequence="2" />
+    <menuitem id="exo_sub_menu_account_account" parent="exo_menu_account_account"
+      action="action_show_account_account" />
+  </data>
+</odoo>

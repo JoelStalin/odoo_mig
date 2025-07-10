@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Form grocery store -->
+        <record id='account_line_load_form_wiew' model='ir.ui.view'>
+            <field name='name'>account.line.load.form.view</field>
+            <field name='model'>account.line.load</field>
+            <field name='arch' type='xml'>
+                <form string='Cargas que tiene una linea de factura'>
+                    <sheet>
+                        <group>
+                            <field name='name' />
+                            <field name='driver' />
+                            <field name='move_type' />
+                            <field name='status' />
+                            <field name='shipper' />
+                            <field name='load_id' />
+                            <field name='original_load_id' readonly="1" />
+                            <field name='load_number' />
+                            <field name='orders' />
+                            <field name='was_restored' />
+                            <field name='account_line_load_state' />
+                            <field name='account_line_id' />
+                             
+
+                            <field name='block_date_start'  readonly="1"  />
+                            <field name='block_date_end'  readonly="1"  />
+                            <field name='is_programming'  readonly="1"  />
+                            <field name='is_schedule_executed'  readonly="1"  />
+                            <field name='account_move_id' readonly="1" />
+                            
+                            <field name='product_tmpl_id'  optional="hide" />
+                            <field name='is_programming' optional="hide"/>
+                            <field name='is_schedule_executed' optional="hide"/>
+                            <field name='block_date_start' optional="hide"/>
+                            <field name='block_date_end' optional="hide"/>
+                            <field name='transporter_id' optional="hide"/>
+                            <field name='shipper_id' optional="hide"/>
+                            <field name='is_exo_app' optional="hide"/>
+                            <field name='group_code' optional="hide"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree grocery store-->
+        <record id='account_line_load_tree_view' model='ir.ui.view'>
+            <field name='name'>account.line.load.tree.view</field>
+            <field name='model'>account.line.load</field>
+            <field name='arch' type='xml'>
+                <tree string='Listado de Cargas que tiene una linea de factura'>
+                    <field name='name' />
+                    <field name='driver' />
+                    <field name='move_type' />
+                    <field name='status' />
+                    <field name='shipper' />
+                    <field name='load_id' />
+                    <field name='original_load_id' />
+                    <field name='load_number' />
+                    <field name='was_restored' />
+                    <field name='account_line_load_state' />
+                    <field name='orders' />
+                    <field name='account_line_id' />
+                    <field name='account_move_id'  />
+                    
+                    <field name='product_tmpl_id'    />
+                    <field name='is_programming'    />
+                    <field name='is_schedule_executed'    />
+                    <field name='block_date_start'    />
+                    <field name='block_date_end'    />
+                    <field name='transporter_id'    />
+                    <field name='shipper_id'    />
+                    <field name='is_exo_app'    />
+                    <field name='group_code'    />
+
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Search grocery store-->
+        <record id="account_line_load_search_view" model="ir.ui.view">
+            <field name="name">account.line.load.search.view</field>
+            <field name="model">account.line.load</field>
+            <field name="arch" type="xml">
+                <search string="Busqueda">
+                    <field name='name' />
+                    <field name='driver' />
+                    <field name='orders' />
+                    <field name='move_type' />
+                    <field name='status' />
+                    <field name='shipper' />
+                    <field name='account_line_load_state' />
+                    <field name='was_restored' />
+                    <field name='load_id' />
+                    <field name='original_load_id' />
+
+                    <field name='load_number' />
+                    <field name='account_move_id'  />
+                    
+                    <field name='block_date_start'    />
+                    <field name='block_date_end'    />
+                    <field name='is_programming'    />
+                    <field name='is_schedule_executed'    />
+                    
+                </search>
+            </field>
+        </record>
+
+        <record id="action_refresh_loads_with_exo" model="ir.actions.server">
+            <field name="name">Actualizar load numbers con EXO</field>
+            <field name="model_id" ref="model_account_line_load" />
+            <field name="binding_model_id" ref="model_account_line_load" />
+            <field name="state">code</field>
+            <field name="code">
+                if records: action = records.refresh_loads_with_exo()
+            </field>
+        </record>
+
+
+        <record id="action_insert_load_in_invoice" model="ir.actions.server">
+            <field name="name">Insertar carga en una factura de proveedor</field>
+            <field name="model_id" ref="model_account_line_load" />
+            <field name="binding_model_id" ref="model_account_line_load" />
+            <field name="groups_id" eval="[(4,ref('base.group_system'))]"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records: records.create_in_invoice()
+            </field>
+        </record>
+    </data>
+</odoo>

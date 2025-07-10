@@ -1,0 +1,106 @@
+<odoo>
+   <record id="action_update_acc_holder_name" model="ir.actions.server">
+        <field name="name">Actualizar Titulares</field>
+        <field name="model_id" ref="model_bank_account_dominicana"/>
+        <field name="binding_model_id" ref="model_bank_account_dominicana"/>
+        <field name="binding_type">action</field>
+        <field name="state">code</field>
+        <field name="code">action = env['bank.account.dominicana'].action_actualizar_acc_holder_name()</field>
+    </record>
+    <!-- Vista Formulario -->
+    <record id="view_bank_account_form" model="ir.ui.view">
+        <field name="name">bank.account.dominicana.form</field>
+        <field name="model">bank.account.dominicana</field>
+        <field name="arch" type="xml">
+            <form string="Cuenta Bancaria Dominicana">
+                <sheet>
+                    <group>
+                        <field name="bank_code"/>
+                        <field name="swift_code"/>
+                        <field name="bank_name"/>
+                        <field name="active"/>
+                        <!-- ✅ Aquí lo agregamos -->
+                    </group>
+                    <group>
+                        <field name="partner_id"/>
+                        <field name="account_number"/>
+                        <field name="acc_holder_name" />
+                    </group>
+                    <group>
+                        <field name="account_type"/>
+                        <field name="transfer_type"/>
+                    </group>
+                    <group>
+                        <field name="document_type" readonly="1"/>
+                        <field name="document_number" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vista Lista -->
+    <record id="view_bank_account_tree" model="ir.ui.view">
+        <field name="name">bank.account.dominicana.tree</field>
+        <field name="model">bank.account.dominicana</field>
+        <field name="arch" type="xml">
+            <tree string="Cuentas Bancarias">
+                <field name="bank_code"/>
+                <field name="swift_code"/>
+                <field name="bank_name"/>
+                <field name="partner_id"/>
+                <field name="account_number"/>
+                <field name="acc_holder_name"/>
+                <field name="account_type"/>
+                <field name="transfer_type"/>
+                <field name="document_number"/>
+                <field name="active"/>
+                <!-- ✅ Mostramos el estado aquí también -->
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista de búsqueda -->
+    <record id="view_bank_account_search" model="ir.ui.view">
+        <field name="name">bank.account.dominicana.search</field>
+        <field name="model">bank.account.dominicana</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Cuentas Bancarias">
+                <!-- Campos para búsqueda rápida y filtros -->
+                <field name="bank_code"/>
+                <field name="swift_code"/>
+                <field name="bank_name"/>
+                <field name="partner_id"/>
+                <field name="account_number"/>
+                <field name="acc_holder_name"/>
+                <field name="account_type"/>
+                <field name="transfer_type"/>
+                <field name="document_type"/>
+                <field name="document_number"/>
+                <!-- Filtros predefinidos -->
+                <filter name="filter_active" string="Solo activos" domain="[('active','=',True)]"/>
+                <filter name="filter_inactive" string="Solo inactivos" domain="[('active','=',False)]"/>
+                <!-- Nuevos filtros por bank_code -->
+                <filter name="filter_bank_bhd" string="Sólo BHD" domain="[('bank_code','=','BHD')]"/>
+                <filter name="filter_bank_not_bhd" string="No es BHD" domain="[('bank_code','!=','BHD')]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Acción -->
+    <record id="action_bank_account_dominicana" model="ir.actions.act_window">
+        <field name="name">Cuentas Bancarias</field>
+        <field name="res_model">bank.account.dominicana</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p>
+                Gestiona las cuentas bancarias dominicanas de tus contactos o terceros con control sobre tipo de producto, transferencias y datos del banco.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menús -->
+    <menuitem id="menu_bank_account_provider" name="Gestión Bancaria" action="action_bank_account_dominicana" parent="account.menu_finance_payables" sequence="221"/>
+
+    <menuitem id="menu_bank_account_client" name="Gestión Bancaria" action="action_bank_account_dominicana" parent="account.menu_finance_receivables" sequence="221"/>
+</odoo>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_exo_account_move_form_inherit" model="ir.ui.view">
+        <field name="name">account.move.form.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <widget name="web_ribbon" title="Pendiente" bg_color="bg-info"
+                    attrs="{'invisible': ['|', '|', ('state', '!=', 'draft'), ('move_type', '!=', 'in_invoice'), ('provider_state', '!=', 'pending')]}" />
+
+                <widget name="web_ribbon" title="De Acuerdo" bg_color="bg-success"
+                    attrs="{'invisible': ['|', '|', ('state', '!=', 'draft'), ('move_type', '!=', 'in_invoice'), ('provider_state', '!=', 'agree')]}" />
+
+                <widget name="web_ribbon" title="En desacuerdo" bg_color="bg-danger"
+                    attrs="{'invisible': ['|', '|', ('state', '!=', 'draft'), ('move_type', '!=', 'in_invoice'), ('provider_state', '!=', 'disagree')]}" />
+
+                <widget name="web_ribbon" title="Sin Cargas" bg_color="bg-danger"
+                    attrs="{'invisible': [('automatic_has_loads', '=', True)]}" />
+
+                <button
+                    string="Beneficios y Cargas"
+                    class="oe_stat_button "
+                    name="create_move_line_benefit_discount"
+                    icon="fa-globe" type="object"
+                    attrs="{'invisible': [('state', '!=', 'draft')]}"
+                >
+                </button>
+
+
+            </div>
+
+            <field name="invoice_date" position="after">
+                <field name="lock_invoice" />
+                <field name="exo_invoice_sequence" />
+                <field name="exo_invoice_list_id" />
+                <field name="is_automatic_invoice" readonly="1" />
+                <field name="automatic_has_loads" readonly="1" />
+                <field name="excel_attachment_file" widget="binary" />
+                <field name="load_invoice_code" readonly="1" />
+                <field name="load_invoice_date" readonly="1" />
+                <field name="provider_checked" readonly="1" />
+                <field name="disagree_reason" readonly="1" />
+                <field name="provider_state" readonly="1" />
+                <field name="block_date_start" readonly="1" />
+                <field name="block_date_end" readonly="1" />
+                <field name="is_block_finished" readonly="1" />
+                <field name="templates_uploaded" groups="base.group_system" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_exo_invoice_tree_inherited" model="ir.ui.view">
+        <field name="name">exo.invoice.tree.inherited</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_out_invoice_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_date']" position="after">
+                <field name="last_payment" />
+                <field name="payment_time" />
+                <field name="due_payment_time_days" />
+                <field name="load_invoice_date" />
+                <field name="block_date_start" />
+                <field name="block_date_end" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_exo_invoice_bill_tree_inherited" model="ir.ui.view">
+        <field name="name">exo.invoice.bill.tree.inherited</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_in_invoice_bill_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_date_due']" position="after">
+                <field name="last_payment" />
+                <field name="payment_time" />
+                <field name="due_payment_time_days" />
+                <field name="load_invoice_date" />
+                <field name="block_date_start" />
+                <field name="block_date_end" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_run_insurance_2_percent" model="ir.actions.server">
+        <field name="name">Recalcular 2% de Carga</field>
+        <field name="model_id" ref="model_account_move" />
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="state">code</field>
+        <field name="code">
+            if records: action = records.insurance_2_percent_recompute()
+        </field>
+    </record>
+
+    <record id="action_get_load_numbers_from_excel" model="ir.actions.server">
+        <field name="name">Insertar Cargas desde el Excel</field>
+        <field name="model_id" ref="model_account_move" />
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="state">code</field>
+        <field name="code">
+            if records: action = records.insert_line_load_from_excel()
+        </field>
+    </record>
+
+    <record id="action_remove_account_line_load" model="ir.actions.server">
+        <field name="name">Remover Cargas</field>
+        <field name="model_id" ref="model_account_move" />
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="state">code</field>
+        <field name="groups_id" eval="[(4,ref('exo_api.remove_loads'))]" />
+        <field name="code">
+            if records: action = records.remove_account_line_load()
+        </field>
+    </record>
+
+    <record id="action_get_load_numbers_by_order_id_from_excel" model="ir.actions.server">
+        <field name="name">Insertar Cargas desde el Excel por ordenes</field>
+        <field name="model_id" ref="model_account_move" />
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="state">code</field>
+        <field name="code">
+            if records: action = records.insert_line_load_from_excel_by_orders()
+        </field>
+    </record>
+
+
+    <record id="action_get_loads_numbers_from_line" model="ir.actions.server">
+        <field name="name">Insertar Cargas desde las lineas de la facturas</field>
+        <field name="model_id" ref="model_account_move" />
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="state">code</field>
+        <field name="code">
+            if records: action = records.insert_line_load_from_lines()
+        </field>
+    </record>
+
+    <record id="action_generate_client_template_files" model="ir.actions.server">
+        <field name="name">Plantilla Cliente</field>
+        <field name="model_id" ref="model_account_move" />
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="state">code</field>
+        <field name="code">
+            if records: action = records.generate_client_template_files()
+        </field>
+    </record>
+
+    <record id="action_generate_provider_template_files" model="ir.actions.server">
+        <field name="name">Plantilla Proveedor</field>
+        <field name="model_id" ref="model_account_move" />
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="state">code</field>
+        <field name="code">
+            if records: records.generate_provider_template_files()
+        </field>
+    </record>
+
+
+    <record id="action_generate_difference_bank_fee" model="ir.actions.server">
+        <field name="name">Generar Cargo por Diferencia Bancaria</field>
+        <field name="model_id" ref="model_account_move" />
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="state">code</field>
+        <field name="code">
+            if records: records.generate_partner_bank_fee()
+        </field>
+    </record>
+
+    <record id="action_generate_transporter_loads" model="ir.actions.server">
+        <field name="name">Generar cargas de transportistas</field>
+        <field name="model_id" ref="model_account_move" />
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="groups_id" eval="[(4,ref('base.group_system'))]" />
+        <field name="state">code</field>
+        <field name="code">
+            if records: records.generate_transporter_loads()
+        </field>
+    </record>
+
+    <record id="action_restore_to_draft" model="ir.actions.server">
+        <field name="name">Reestablecer a borradores</field>
+        <field name="model_id" ref="model_account_move" />
+        <field name="binding_model_id" ref="model_account_move" />
+        <field name="groups_id" eval="[(4,ref('base.group_system'))]" />
+        <field name="state">code</field>
+        <field name="code">
+            if records: records.button_draft()
+        </field>
+    </record>
+</odoo>

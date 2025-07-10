@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+        <record id="exo_api_view_batch_payment_form_inherit" model="ir.ui.view">
+            <field name="name">exo_api.account.batch.payment.form.inherit</field>
+            <field name="model">account.batch.payment</field>
+            <field name="inherit_id" ref="account_batch_payment.view_batch_payment_form" />
+            <field name="arch" type="xml">
+
+                <!-- ✅ Ribbons al inicio del <form>, fuera del sheet -->
+                <xpath expr="//sheet" position="before">
+                    <widget name="web_ribbon" title="No Aprobado" bg_color="bg-danger" attrs="{'invisible': [('is_approved', '=', True)]}" />
+                    <widget name="web_ribbon" title="Aprobado" bg_color="bg-success" attrs="{'invisible': [('is_approved', '=', False)]}" />
+                </xpath>
+
+                <!-- Botón en el header -->
+                <xpath expr="//header" position="inside">
+                    <button name="approve_batch_payment" string="Aprobar Pago Por Lote" type="object" attrs="{'invisible': [('is_approved','=', True)]}" groups="exo_api.group_approve_bath_payment" />
+                </xpath>
+
+                <!-- Campo is_approved al lado de batch_type -->
+                <xpath expr="//field[@name='batch_type']" position="after">
+                    <field name="is_approved" readonly="1" />
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_batch_payment_form_inherit_show_partner_banks" model="ir.ui.view">
+            <field name="name">account.batch.payment.form.inherit.bank_ids</field>
+            <field name="model">account.batch.payment</field>
+            <field name="inherit_id" ref="account_batch_payment.view_batch_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_ids']/tree/field[@name='partner_id']" position="after">
+                    <field name="partner_bank_do_id" string="Cuenta Bancaria" />
+                </xpath>
+            </field>
+        </record>
+        <!-- <record id="view_account_batch_payment_search_inherit_bank_account" model="ir.ui.view">
+            <field name="name">account.batch.payment.search.inherit.bank.account</field>
+            <field name="model">account.batch.payment</field>
+            <field name="inherit_id" ref="account_batch_payment.view_account_batch_payment_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='search']" position="before">
+                    <field name="partner_bank_do_id" string="Cuenta Bancaria"/>
+                </xpath>
+            </field>
+        </record> -->
+    </data>
+</odoo>

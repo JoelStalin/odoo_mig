@@ -1,0 +1,45 @@
+<odoo>
+    <record id="view_invoice_fully_loaded_wizard_form" model="ir.ui.view">
+        <field name="name">invoice.fully.loaded.wizard.form</field>
+        <field name="model">invoice.fully.loaded.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Generar Templates para Facturas">
+                <sheet>
+                    <group>
+                        <p>
+                            Este proceso:
+                            <ul>
+                                <li>Sincroniza las cargas y genera facturas automáticamente</li>
+                                <li>Genera los templates PDF/Excel si las facturas tienen bloque vencido</li>
+                                <li><strong>Cierra las sesiones activas de otros usuarios</strong></li>
+                            </ul>
+                        </p>
+                    </group>
+                    <footer>
+                        <button name="execute_generate_templates"
+                                type="object"
+                                string="Ejecutar Proceso"
+                                class="oe_highlight"
+                                confirm="¿Está seguro de ejecutar este proceso? Este proceso cerrará las sesiones activas de otros usuarios. Se recomienda ejecutarlo fuera del horario laboral."
+                                groups="exo_api.group_invoice_fully_loaded_manual"/>
+                        <button string="Cancelar" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_invoice_fully_loaded_wizard" model="ir.actions.act_window">
+        <field name="name">Generar Cargas</field>
+        <field name="res_model">invoice.fully.loaded.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+   <menuitem id="exo_api.menu_invoice_fully_loaded_wizard"
+          name="Generar Cargas"
+          parent="account.menu_finance_payables"
+          action="action_invoice_fully_loaded_wizard"
+          sequence="220"/>
+
+</odoo>

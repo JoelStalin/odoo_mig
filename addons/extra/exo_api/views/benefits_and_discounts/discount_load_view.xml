@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ✅ Acción -->
+        <record model="ir.actions.act_window" id="action_show_discount_load">
+            <field name="name">Descuentos por Carga</field>
+            <field name="res_model">discount.load</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- ✅ Menú -->
+        <menuitem id="menu_discount_load"
+                  name="Descuentos por Carga"
+                  parent="benefits_and_discounts"
+                  action="action_show_discount_load"
+                  sequence="3"/>
+
+        <!-- ✅ Vista Tree -->
+        <record id="discount_load_tree_view" model="ir.ui.view">
+            <field name="name">discount.load.tree.view</field>
+            <field name="model">discount.load</field>
+            <field name="arch" type="xml">
+                <tree string="Listado de Descuentos por Carga">
+                    <field name="load_reference_id"/>
+                    <field name="load_number"/>
+                    <field name="product_quantity"/>
+                    <field name="amount"/> <!-- Added new field -->
+                    <field name="transporter_name"/> <!-- Added new field -->
+                    <field name="transporter_partner_id"/> <!-- Added new field -->
+                    <field name="discount_parameters_ids"/>
+                    <field name="discount_ids"/>
+                    <field name="discoun_monthly_ids"/>
+                    <field name="imported"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- ✅ Vista Form -->
+        <record id="discount_load_form_view" model="ir.ui.view">
+            <field name="name">discount.load.form.view</field>
+            <field name="model">discount.load</field>
+            <field name="arch" type="xml">
+                <form string="Descuentos por Carga">
+                    <sheet>
+                        <group string="Datos de Carga">
+                            <field name="load_reference_id"/>
+                            <field name="load_external_id" readonly="1"/>
+                            <field name="load_number" readonly="1"/>
+                            <field name="product_quantity"/>
+                            <field name="amount"/> <!-- Added new field -->
+                            <field name="transporter_external_id" readonly="1"/> <!-- Added new field -->
+                            <field name="transporter_name" readonly="1"/> <!-- Added new field -->
+                            <field name="transporter_partner_id" readonly="1"/> <!-- Added new field -->
+                            <field name="discount_parameters_ids"/>
+                        </group>
+                        <group string="Descuentos Generados">
+                            <field name="discount_ids" readonly="1"/>
+                            <field name="discoun_monthly_ids" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- ✅ Vista Search -->
+        <record id="discount_load_search_view" model="ir.ui.view">
+            <field name="name">discount.load.search.view</field>
+            <field name="model">discount.load</field>
+            <field name="arch" type="xml">
+                <search string="Buscar Descuentos por Carga">
+                    <field name="load_reference_id"/>
+                    <field name="load_number"/>
+                    <field name="product_quantity"/>
+                    <field name="transporter_name"/> <!-- Added new field -->
+                    <field name="transporter_partner_id"/> <!-- Added new field -->
+                    <field name="discount_parameters_ids"/>
+                </search>
+            </field>
+        </record>
+
+    </data>
+</odoo>

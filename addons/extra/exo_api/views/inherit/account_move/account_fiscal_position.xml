@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_fiscal_position_form_inherit" model="ir.ui.view">
+        <field name="name">account.fiscal.position.form.inherit</field>
+        <field name="model">account.fiscal.position</field>
+        <field name="inherit_id" ref="account.view_account_position_form" />
+        <field name="arch" type="xml">
+            <field name="auto_apply" position="after">
+                <field name="request_l10n_latam_document_number" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

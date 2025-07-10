@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Conduces -->
+        <record id='load_file_property_form_wiew' model='ir.ui.view'>
+            <field name='name'>load.file.property.form.view</field>
+            <field name='model'>load.file.property</field>
+            <field name='arch' type='xml'>
+                <form string='Propiedad de la plantilla'>
+                    <sheet>
+                        <group>
+                            <field name='name' />
+                            <field name='key' />
+                            <field name='type' />
+                            <field name='calculation_mode' />
+                            <field name='duplicate_with_sub_list' />
+                            <field name='show' />
+                            <field name='order' />
+                            <field name='value' />
+                            <field name='template_id' />
+                            <field name='is_active' />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree grocery store-->
+        <record id='load_file_property_tree_view' model='ir.ui.view'>
+            <field name='name'>load.file.property.tree.view</field>
+            <field name='model'>load.file.property</field>
+            <field name='arch' type='xml'>
+                <tree string='Listado de Propiedades de una plantilla'>
+                    <field name='name' />
+                    <field name='key' />
+                    <field name='type' />
+                    <field name='calculation_mode' />
+                    <field name='duplicate_with_sub_list' />
+                    <field name='show' />
+                    <field name='order' />
+                    <field name='is_active' />
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Search grocery store-->
+        <record id="load_file_property_search_view" model="ir.ui.view">
+            <field name="name">load.file.property.search.view</field>
+            <field name="model">load.file.property</field>
+            <field name="arch" type="xml">
+                <search string="Busqueda">
+                    <field name='name' />
+                    <field name='key' />
+                    <field name='type' />
+                    <field name='calculation_mode' />
+                    <field name='duplicate_with_sub_list' />
+                    <field name='show' />
+                    <field name='order' />
+                    <field name='value' />
+                    <field name='is_active' />
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

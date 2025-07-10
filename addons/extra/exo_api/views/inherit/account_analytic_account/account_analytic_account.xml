@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_exo_account_analytic_account_form_inherit" model="ir.ui.view">
+        <field name="name">account.analytic.account.form.inherit</field>
+        <field name="model">account.analytic.account</field>
+        <field name="inherit_id" ref="analytic.view_account_analytic_account_form" />
+        <field name="arch" type="xml">
+            <field name="currency_id" position="after">
+                <field name="warehouses" widget="many2many_tags" />
+                <field name="is_to_invoice" />
+            </field>
+        </field>
+    </record>
+</odoo>

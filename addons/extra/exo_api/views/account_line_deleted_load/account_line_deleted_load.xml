@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tree grocery store-->
+        <record id='account_line_deleted_load_tree_view' model='ir.ui.view'>
+            <field name='name'>account.line.deleted.load.tree.view</field>
+            <field name='model'>account.line.deleted.load</field>
+            <field name='arch' type='xml'>
+                <tree string='Listado de Cargas borradas'>
+                    <field name='create_uid' />
+                    <field name='create_date' />
+                    <field name='driver' />
+                    <field name='move_type' />
+                    <field name='status' />
+                    <field name='shipper' />
+                    <field name='load_id' />
+                    <field name='load_number' />
+                    <field name='orders' />
+                    <field name='account_line_id' />
+                    <field name='would_be_in_move_line_id' />
+                    <field name='account_move_id' readonly="1" />
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Search grocery store-->
+        <record id="account_line_deleted_load_search_view" model="ir.ui.view">
+            <field name="name">account.line.deleted.load.search.view</field>
+            <field name="model">account.line.deleted.load</field>
+            <field name="arch" type="xml">
+                <search string="Busqueda">
+                    <field name='create_uid' />
+                    <field name='create_date' />
+                    <field name='driver' />
+                    <field name='orders' />
+                    <field name='move_type' />
+                    <field name='status' />
+                    <field name='shipper' />
+                    <field name='load_id' />
+                    <field name='load_number' />
+                    <field name='account_move_id' />
+                </search>
+            </field>
+        </record>
+
+
+        <record id="action_action_restore_load" model="ir.actions.server">
+            <field name="name">Restaurar Cargas</field>
+            <field name="model_id" ref="model_account_line_deleted_load" />
+            <field name="binding_model_id" ref="model_account_line_deleted_load" />
+            <field name="state">code</field>
+            <field name="code">
+                if records: action = records.action_restore_load()
+            </field>
+        </record>
+
+        <record id="action_set_would_be_in_move_line_id" model="ir.actions.server">
+            <field name="name">Establecer Linea de carga probable</field>
+            <field name="model_id" ref="model_account_line_deleted_load" />
+            <field name="binding_model_id" ref="model_account_line_deleted_load" />
+            <field name="state">code</field>
+            <field name="code">
+                if records: action = records.action_set_would_be_in_move_line_id()
+            </field>
+        </record>
+    </data>
+</odoo>

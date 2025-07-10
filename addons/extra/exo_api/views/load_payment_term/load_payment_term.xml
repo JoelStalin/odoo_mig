@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Terminos de Pago -->
+        <record id='load_payment_term_form_wiew' model='ir.ui.view'>
+            <field name='name'>load.payment.term.form.view</field>
+            <field name='model'>load.payment.term</field>
+            <field name='arch' type='xml'>
+                <form string='Frecuencia de Facturación'>
+                    <sheet>
+                        <group>
+                            <field name='name' />
+                            <field name='type_freq' />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree grocery store-->
+        <record id='load_payment_term_tree_view' model='ir.ui.view'>
+            <field name='name'>load.payment.term.tree.view</field>
+            <field name='model'>load.payment.term</field>
+            <field name='arch' type='xml'>
+                <tree string='Listado de Frecuencia de Facturación'>
+                    <field name='name' />
+                    <field name='type_freq' />
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- Search grocery store-->
+        <record id="load_payment_term_search_view" model="ir.ui.view">
+            <field name="name">load.payment.term.search.view</field>
+            <field name="model">load.payment.term</field>
+            <field name="arch" type="xml">
+                <search string="Busqueda">
+                    <field name='name' />
+                    <field name='type_freq' />
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

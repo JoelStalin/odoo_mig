@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_load_compute_client_wizard" model="ir.ui.view">
+        <field name="name">Run Load</field>
+        <field name="model">account.load</field>
+        <field name="arch" type="xml">
+            <form string="Parameters">
+                <group col="2">
+                    <field name="start_date" />
+                    <field name="end_date" />
+                    <field name="account_load_client_id" string="Cliente" />
+                    <field name="has_error_continue_others" />
+                    <field name="qty_load_to_take" />
+
+                    <field name="rounded_money" />
+                    <field name="client_analytic_accounts" string="Cuentas Analíticas"
+                        attrs="{'invisible': ['|', ('account_load_client_id', '=', False), ('search_by_warehouse', '=', False)]}" />
+
+                    <field name="search_by_warehouse" readonly="1" />
+                    <field name="exo_load_start_date" readonly="1" />
+                    <field name="group_by_payment_term" readonly="1" />
+                    <field name="group_by_warehouse" readonly="1" />
+
+
+                    <field name="exo_load_statuses" readonly="1" />
+                    <field name="odoo_load_benefits_and_discounts_to_create" readonly="1" />
+                    <field name="allowed_order_status" groups="base.group_system" />
+
+                </group>
+
+                <p style="color: red;">
+                    ...AL PRESIONAR (Obtener Cargas y Actualizar Facturas) SE ACTUALIZARÁN TODAS LAS
+                    FACTURAS QUE AÚN NO SE HAYAN
+                    CONFIRMADO. EN OTRAS PALABRAS QUE ESTÉN EN (BORRADOR O DRAFT)?
+                    PARA QUE NO LE AFECTE NINGUNA DE SUS FACTURAS ASEGURARSE DE QUE TODAS ELLAS
+                    ESTEN CONFIRMADAS O POSTED
+                </p>
+
+                <footer>
+
+                    <button name="execute_load" string="Obtener Cargas y Actualizar Facturas"
+                        type="object"
+                        class="btn-primary" data-hotkey="q" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_load_compute_provider_wizard" model="ir.ui.view">
+        <field name="name">Run Load</field>
+        <field name="model">account.load</field>
+        <field name="arch" type="xml">
+            <form string="Parameters">
+                <group col="2">
+                    <field name="start_date" />
+                    <field name="end_date" />
+                    <field name="account_load_client_id" string="Proveedor"
+                        domain="[('internal_partner_type','=', 'transporter')]" />
+                    <field name="has_error_continue_others" />
+                    <field name="qty_load_to_take" />
+                    <field name="search_by_warehouse" readonly="1" />
+                    <field name="exo_load_start_date" readonly="1" />
+                    <field name="exo_load_statuses" readonly="1" />
+                    <field name="group_by_payment_term" readonly="1" />
+
+                    <field name="odoo_load_benefits_and_discounts_to_create" readonly="1" />
+                    <field name="allowed_order_status" />
+
+                </group>
+
+                <p style="color: blue;">
+                    AL PRESIONAR (Obtener Cargas y Actualizar Facturas) SE ACTUALIZARÁN TODAS LAS
+                    FACTURAS QUE AÚN NO SE HAYAN
+                    CONFIRMADO. EN OTRAS PALABRAS QUE ESTÉN EN (BORRADOR O DRAFT)?
+                    PARA QUE NO LE AFECTE NINGUNA DE SUS FACTURAS ASEGURARSE DE QUE TODAS ELLAS
+                    ESTEN CONFIRMADAS O POSTED
+                </p>
+
+                <br />
+
+                <group>
+                    <field name="search_load_id" />
+                    <button name="get_info_load_transporter" string="Verificar Carga" type="object"
+                        class="btn-primary" data-hotkey="q" />
+                </group>
+
+                <footer>
+
+                    <button name="execute_load_provider"
+                        string="Obtener Cargas y Actualizar Facturas"
+                        type="object"
+                        class="btn-primary" data-hotkey="q" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_load_client_compute" model="ir.actions.act_window">
+        <field name="name">Crear y/o actualizar facturas de los clientes con las cargas provenientes
+            de EXO
+            correspondiente al rango de fecha seleccionado.</field>
+        <field name="res_model">account.load</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'form_view_ref': 'exo_api.view_load_compute_client_wizard'}</field>
+    </record>
+    <record id="action_load_provider_compute" model="ir.actions.act_window">
+        <field name="name">Crear y/o actualizar facturas de los proveedores con las cargas
+            provenientes
+            de EXO
+            correspondiente al rango de fecha seleccionado.</field>
+        <field name="res_model">account.load</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'form_view_ref': 'exo_api.view_load_compute_provider_wizard'}</field>
+    </record>
+
+    <record id="action_update_conciliation" model="ir.actions.server">
+        <field name="name">Actualizar Reporte de Conciliacion</field>
+        <field name="model_id" ref="model_exo_odoo_conciliation" />
+        <field name="state">code</field>
+        <field name="code">model.generate_conciliation()</field>
+    </record>
+
+    <record id="action_delete_duplicateds_conciliation" model="ir.actions.server">
+        <field name="name">Eliminar Duplicados en el Reporte de Conciliacion</field>
+        <field name="model_id" ref="model_exo_odoo_conciliation" />
+        <field name="state">code</field>
+        <field name="code">model.remove_conciliation_records()</field>
+    </record>
+
+    <record id="action_update_odoo_status" model="ir.actions.server">
+        <field name="name">Actualizar Estados en Odoo</field>
+        <field name="model_id" ref="model_exo_odoo_conciliation" />
+        <field name="state">code</field>
+        <field name="code">model.update_odoo_status()</field>
+    </record>
+
+
+    <record id="action_update_exo_load_odoo" model="ir.actions.server">
+        <field name="name">Actualizar Cargas de Odoo que no estan en EXO</field>
+        <field name="model_id" ref="model_exo_odoo_conciliation" />
+        <field name="state">code</field>
+        <field name="code">model.get_odoo_loads_not_in_exo()</field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="action_show_exo_odoo_conciliation">
+        <field name="name">Conciliacion entre EXO y Odoo</field>
+        <field name="res_model">exo.odoo.conciliation</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+
+    <menuitem name="Crear y/o actualizar facturas de los clientes"
+        action="action_load_client_compute"
+        id="exo_api.menu_finance_receivables_load_compute_client"
+        parent="account.menu_finance_receivables" sequence="216" />
+
+
+    <menuitem name="Crear y/o actualizar facturas de los proveedores"
+        action="action_load_provider_compute"
+        id="exo_api.menu_finance_receivables_load_compute_provider"
+        parent="account.menu_finance_payables" sequence="216" />
+</odoo>

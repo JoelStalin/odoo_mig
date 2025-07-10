@@ -1,0 +1,55 @@
+Codigo 
+correr comando "uuidgen" y copiar valor 
+sudo -i
+su - postgres
+psql
+\l => Listar base de datos
+\c jabiya_qa  => Acceder a la base de datos
+\dt Ver tablas
+
+
+Es necesario actualizar los siguientes key de la tabla ir_config_parameter con valores generados 
+Keys a actualizar: 
+    database.secret
+    database.uuid
+    ocn.uuid
+
+Como generar un valor:
+   Correr en linux el siguiente comando:   
+    - uuidgen
+
+Ejemplo de actualizar un campo en psql
+update ir_config_parameter  set value = '948ea00c-853e-48e7-ac02-6852bddc0e54' where key = 'database.secret';
+update ir_config_parameter  set value = '948ea00c-853e-48e7-ac02-6852bddc0e54' where key = 'database.uuid';
+update ir_config_parameter  set value = '948ea00c-853e-48e7-ac02-6852bddc0e54' where key = 'ocn.uuid';
+update ir_config_parameter  set value = '' where key = 'database.enterprise_code';
+
+
+Si se quiere remover la licensia del backup copiado se procede a dejar vacio el key 
+database.enterprise_code en la misma tabla.
+update ir_config_parameter  set value = '' where key = 'database.enterprise_code';
+
+
+
+
+Nota: 
+Para poder actualizar el modulo de api_models
+es necesario quitar (commentar brevemente) las columnas:
+ salesperson_creator
+ firebase_device_token
+ exo_comment
+ user_profile_id
+
+del archivo models/inherit/res_partner.py
+luego ir a aplicaciones => Entrar en el moudlo api_models => Module Info
+
+Luego volver a colocar las propiedades  antes mencionada
+y proceder a darle al boton "Upgrade"
+
+
+
+
+dpkg --get-selections | grep postgres
+sudo apt-get upgrade
+docker exec -it -uroot odoo-v15 /bin/bash
+pg_lsclusters

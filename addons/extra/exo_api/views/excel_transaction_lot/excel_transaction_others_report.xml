@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <report
+            id="excel_transaction_others"
+            model="account.batch.payment"
+            string="Transaciones Otros Bancos"
+            report_type="xlsx"
+            name="exo_api.excel_transaction_others"
+            file="exo_api.excel_transaction_others"
+            />
+        
+
+    </data>
+</odoo>

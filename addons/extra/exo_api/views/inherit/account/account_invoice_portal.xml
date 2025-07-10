@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="portal_invoice_page_custom" inherit_id="account.portal_invoice_page"
+        priority="100">
+        <xpath expr="." position="inside">
+            <script>
+               function validate(typeValue, document_number) {
+					typeValue = typeValue.substr(1, 3)
+					// Expresión regular en JavaScript con el valor de typeValue insertado dinámicamente
+					let pattern = new RegExp(`^(P?((?=.{13})E)${typeValue}(\\d{10})|(((?=.{11})B))${typeValue}(\\d{8}))$`);
+					return pattern.test(document_number)
+				}
+
+				function onAgree(event) {
+					const request_document_number = event.getAttribute("request_document_number");
+
+					let url = event.getAttribute("url");
+
+					if (request_document_number == "True") {
+						const code_prefix = event.getAttribute("document_fiscal_position_code_prefix");
+						let doc_number = prompt("Cual es su No. Comprobante fiscal");
+						if (!validate(code_prefix, doc_number)) {
+							alert("El No. Comprobante Fiscal no es valido");
+							return;
+						}
+
+						url += "?doc_number=" + encodeURIComponent(doc_number);
+						window.location.href = url;
+					}
+				}
+
+				function onDisagree(event) {
+					const promtResult = prompt("Cual es su razon para no estar de acuerdo")
+					if (promtResult) {
+						let reason = encodeURIComponent(promtResult);
+						window.location.href = event.getAttribute("url") + "?reason=" + reason;
+					} else {
+						alert("Intentelo de nuevo e introduzca una razon para no estar de acuerdo")
+					}
+				}
+
+
+            </script>
+        </xpath>
+
+        <xpath expr="//div[@id='invoice_content']/div[@class='o_portal_html_view shadow p-3']"
+            position="before">
+
+            <!-- LABELS -->
+            <div class="panel-body"
+                t-if="invoice.provider_checked and invoice.provider_state != 'pending'">
+                <div t-if="invoice.provider_state == 'agree'"
+                    class="alert alert-success oe_button_box" role="alert">
+                    <p>
+                        <i class="fa fa-thumbs-up" /> Confirmada Exitosamente... </p>
+                </div>
+
+                <div t-if="invoice.provider_state == 'disagree'"
+                    class="alert alert-danger oe_button_box" role="alert">
+                    <p>
+                        <i class="fa fa-thumbs-down" /> No estuve de acuerdo... </p>
+                </div>
+            </div>
+
+            <!-- BUTTONS -->
+            <ul class="list-group list-group-flush flex-wrap flex-row flex-lg-column"
+                t-if="invoice.move_type == 'in_invoice' and invoice.state in ('draft') and invoice.is_block_finished">
+                <li class="list-group-item flex-grow-1">
+                    <div class="o_download_pdf btn-toolbar flex-sm-nowrap"
+                        style="justify-content: center;">
+                        <div class="btn-group mr-1  ">
+
+                            <button class="btn btn-primary btn-block o_download_btn"
+                                id="agreeButton" t-att-url="invoice.get_invoice_url('agree')"
+                                t-att-request_document_number="invoice.fiscal_position_id.request_l10n_latam_document_number if invoice.fiscal_position_id else False"
+                                t-att-document_fiscal_position_code_prefix="invoice.l10n_latam_document_type_id.doc_code_prefix"
+                                onclick="onAgree(this)">
+                                <i class="fa fa-thumbs-up" /> Estoy De Acuerdo </button>
+
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-danger btn-block o_download_btn"
+                                id="disagreeButton" t-att-url="invoice.get_invoice_url('disagree')"
+                                onclick="onDisagree(this)">
+                                <i class="fa fa-thumbs-down" /> No Estoy De Acuerdo</button>
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="list-group list-group-flush flex-wrap flex-row flex-lg-column"
+                t-if="invoice.move_type == 'out_invoice' and invoice.state in ('draft')">
+                <li class="list-group-item flex-grow-1">
+                    <div class="o_download_pdf btn-toolbar flex-sm-nowrap">
+                        <div class="btn-group  flex-grow-1 me-1 mb-1">
+                            <a class="btn btn-primary btn-block o_download_btn"
+                                t-att-href="invoice.get_invoice_url('agree')"
+                                title="Confirmar Factura Final">
+                                <i class="fa fa-thumbs-up" />Confirmar Factura Final.</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </xpath>
+    </template>
+</odoo>
+<!-- 
+    PAGINAS DONDE MODIFICAMOS ESTE REPORTE 
+    PORTAL INVOICES
+    account.portal_my_invoices => Hay dos uno con External ID y otro sin External ID
+    document_tax_totals_inherit
+    document_tax_totals
+
+    external_layout_boxed
+    Portal Breadcrumbs
+    record_pager
+    portal_my_invoices
+    Template Header Default
+    Header Brand Logo
+    web.address_layout
+    portal.portal_table
+    report_invoice_document = tabla mas portal de factura
+    	l10n_do_accounting.report_invoice_document_inherited
+ 
+ 	
+    
+    report_invoice_document
+    document_tax_totals
+    document_tax_totals_inherit
+ 
+ -->

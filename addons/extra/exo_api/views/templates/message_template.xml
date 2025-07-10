@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="exo_api.message_template" name="Message Template">
+            <t t-call="website.layout">
+                <div id="wrap">
+                    <div class="oe_structure" />
+                    <div class="container">
+
+                        <div t-if="error_message" class="row">
+                            <div class="col-lg-12">
+                                <div class="alert alert-danger" role="alert">
+                                    <t t-foreach="error_message" t-as="err">
+                                        <t t-esc="err" />
+                                        <br />
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div t-if="success_message" class="row">
+                            <div class="col-lg-12">
+                                <div class="alert alert-success" role="alert">
+                                    <t t-foreach="success_message" t-as="mess">
+                                        <t t-esc="mess" />
+                                        <br />
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+                        <a href="my/invoice">Click aqui para ir a <strong>Mis Facturas</strong></a>
+
+                    </div>
+                    <div class="oe_structure" />
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>

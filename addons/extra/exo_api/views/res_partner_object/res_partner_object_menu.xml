@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record model="ir.actions.act_window" id="action_res_partner_object">
+      <field name="name">ObjectId de los Contactos</field>
+      <field name="res_model">res.partner.object</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Menu -->
+    <menuitem name="ObjectId de los Contactos" id="menu_parent_object_id"
+      sequence="1"
+      groups="base.group_system"
+    />
+    <menuitem id="exo_sub_menu_sub_menu_object_id" name="Id de los Contactos"
+      parent="menu_parent_object_id"
+      action="action_res_partner_object" />
+
+  </data>
+</odoo>
