@@ -52,15 +52,15 @@
             </field>
         </record>
 
-        <!-- Tree grocery store-->
-        <record id='drives_client_tree_view' model='ir.ui.view'>
-            <field name='name'>drives.client.tree.view</field>
+        <!-- List View (formerly Tree) -->
+        <record id='drives_client_list_view' model='ir.ui.view'>
+            <field name='name'>drives.client.list.view</field>
             <field name='model'>drives.client</field>
             <field name='arch' type='xml'>
-                <tree string='Listado de Conduces de los cliente'>
+                <list string='Listado de Conduces de los cliente'>
                     <field name='partner_id' />
                     <field name='drives' />
-                </tree>
+                </list>
             </field>
         </record>
 

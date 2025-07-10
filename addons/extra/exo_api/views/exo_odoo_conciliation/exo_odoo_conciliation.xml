@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- Tree grocery store-->
-        <record id='exo_odoo_conciliation_tree_view' model='ir.ui.view'>
-            <field name='name'>exo.odoo.conciliation.tree.view</field>
+        <!-- List View (formerly Tree) -->
+        <record id='exo_odoo_conciliation_list_view' model='ir.ui.view'>
+            <field name='name'>exo.odoo.conciliation.list.view</field>
             <field name='model'>exo.odoo.conciliation</field>
             <field name='arch' type='xml'>
-                <tree string='Listado de Conciliacion entre EXO y Odoo'>
+                <list string='Listado de Conciliacion entre EXO y Odoo'>
                     <field name='load_id' />
                     <field name='load_number' />
                     <field name='shipper' />

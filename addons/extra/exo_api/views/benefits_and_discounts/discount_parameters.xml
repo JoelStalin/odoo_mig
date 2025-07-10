@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="discount_parameters_tree_view" model="ir.ui.view">
-            <field name="name">discount.parameters.tree.view</field>
+        <record id="discount_parameters_list_view" model="ir.ui.view">
+            <field name="name">discount.parameters.list.view</field>
             <field name="model">discount.parameters</field>
             <field name="arch" type="xml">
-                <tree string="Discount Parameters">
+                <list string="Discount Parameters">
                     <field name="name"/>
                     <field name="product_tmpl_id"/>
                     <field name="analytic_account_id"/>

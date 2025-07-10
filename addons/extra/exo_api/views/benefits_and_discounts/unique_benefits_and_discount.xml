@@ -28,12 +28,12 @@
             </field>
         </record>
 
-        <!-- Tree View -->
-        <record id='unique_benefit_discount_tree_view' model='ir.ui.view'>
-            <field name='name'>unique.benefit.discount.tree.view</field>
+        <!-- List View (formerly Tree) -->
+        <record id='unique_benefit_discount_list_view' model='ir.ui.view'>
+            <field name='name'>unique.benefit.discount.list.view</field>
             <field name='model'>unique.benefit.discount</field>
             <field name='arch' type='xml'>
-                <tree string='Listado de Beneficios y Descuentos de un solo uso'>
+                <list string='Listado de Beneficios y Descuentos de un solo uso'>
                     <field name='name'/>
                     <field name='partner_id'/>
                     <field name='product_tmpl_id'/>

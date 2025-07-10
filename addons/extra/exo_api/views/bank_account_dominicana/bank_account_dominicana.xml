@@ -40,11 +40,11 @@
     </record>
 
     <!-- Vista Lista -->
-    <record id="view_bank_account_tree" model="ir.ui.view">
-        <field name="name">bank.account.dominicana.tree</field>
+    <record id="view_bank_account_list_view" model="ir.ui.view">
+        <field name="name">bank.account.dominicana.list</field>
         <field name="model">bank.account.dominicana</field>
         <field name="arch" type="xml">
-            <tree string="Cuentas Bancarias">
+            <list string="Cuentas Bancarias">
                 <field name="bank_code"/>
                 <field name="swift_code"/>
                 <field name="bank_name"/>

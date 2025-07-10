@@ -47,10 +47,10 @@
 
         <!-- Tree grocery store-->
         <record id='account_line_load_tree_view' model='ir.ui.view'>
-            <field name='name'>account.line.load.tree.view</field>
+            <field name='name'>account.line.load.list.view</field>
             <field name='model'>account.line.load</field>
             <field name='arch' type='xml'>
-                <tree string='Listado de Cargas que tiene una linea de factura'>
+                <list string='Listado de Cargas que tiene una linea de factura'>
                     <field name='name' />
                     <field name='driver' />
                     <field name='move_type' />

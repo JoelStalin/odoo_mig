@@ -30,12 +30,12 @@
             </field>
         </record>
 
-        <!-- Tree grocery store-->
-        <record id='template_load_file_property_tree_view' model='ir.ui.view'>
-            <field name='name'>template.load.file.property.tree.view</field>
+        <!-- List View (formerly Tree) -->
+        <record id='template_load_file_property_list_view' model='ir.ui.view'>
+            <field name='name'>template.load.file.property.list.view</field>
             <field name='model'>template.load.file.property</field>
             <field name='arch' type='xml'>
-                <tree string='Listado de Plantillas para exportar las cargas de EXO'>
+                <list string='Listado de Plantillas para exportar las cargas de EXO'>
                     <field name='name' />
                     <field name='type' />
                     <field name='pdf_page_size' />

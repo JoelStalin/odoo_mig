@@ -17,15 +17,15 @@
             </field>
         </record>
 
-        <!-- Tree grocery store-->
-        <record id='partner_load_status_tree_view' model='ir.ui.view'>
-            <field name='name'>partner.load.status.tree.view</field>
+        <!-- List View (formerly Tree) -->
+        <record id='partner_load_status_list_view' model='ir.ui.view'>
+            <field name='name'>partner.load.status.list.view</field>
             <field name='model'>partner.load.status</field>
             <field name='arch' type='xml'>
-                <tree string='Listado de Estados a Filtrar para las Cargas de EXO'>
+                <list string='Listado de Estados a Filtrar para las Cargas de EXO'>
                     <field name='key' />
                     <field name='name' />
-                </tree>
+                </list>
             </field>
         </record>
 

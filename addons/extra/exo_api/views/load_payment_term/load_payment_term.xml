@@ -18,15 +18,15 @@
             </field>
         </record>
 
-        <!-- Tree grocery store-->
-        <record id='load_payment_term_tree_view' model='ir.ui.view'>
-            <field name='name'>load.payment.term.tree.view</field>
+        <!-- List View (formerly Tree) -->
+        <record id='load_payment_term_list_view' model='ir.ui.view'>
+            <field name='name'>load.payment.term.list.view</field>
             <field name='model'>load.payment.term</field>
             <field name='arch' type='xml'>
-                <tree string='Listado de Frecuencia de Facturación'>
+                <list string='Listado de Frecuencia de Facturación'>
                     <field name='name' />
                     <field name='type_freq' />
-                </tree>
+                </list>
             </field>
         </record>
 

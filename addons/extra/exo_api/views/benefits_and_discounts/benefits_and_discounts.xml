@@ -3,12 +3,12 @@
     <data>
 
 
-        <!-- Tree grocery store-->
-        <record id='partner_benefit_discount_tree_view' model='ir.ui.view'>
-            <field name='name'>partner.benefit.discount.tree.view</field>
+        <!-- List View (formerly Tree) -->
+        <record id='partner_benefit_discount_list_view' model='ir.ui.view'>
+            <field name='name'>partner.benefit.discount.list.view</field>
             <field name='model'>partner.benefit.discount</field>
             <field name='arch' type='xml'>
-                <tree string='Listado de Beneficios y Descuentos de un cliente'>
+                <list string='Listado de Beneficios y Descuentos de un cliente'>
                     <field name='name' />
                     <field name='field_test' />
                     <field name='partner_id' />
@@ -40,12 +40,12 @@
         </record>
 
 
-        <!-- Tree grocery store-->
-        <record id='benefit_discount_tree_view' model='ir.ui.view'>
-            <field name='name'>benefit.discount.tree.view</field>
+        <!-- List View (formerly Tree) -->
+        <record id='benefit_discount_list_view' model='ir.ui.view'>
+            <field name='name'>benefit.discount.list.view</field>
             <field name='model'>benefit.discount</field>
             <field name='arch' type='xml'>
-                <tree string='Listado de Beneficios y Descuentos'>
+                <list string='Listado de Beneficios y Descuentos'>
                     <field name='name' />
                     <field name='origin' />
                     <field name='product_tmpl_id' />

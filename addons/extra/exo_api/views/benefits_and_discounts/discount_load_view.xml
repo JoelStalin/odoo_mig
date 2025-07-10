@@ -16,12 +16,12 @@
                   action="action_show_discount_load"
                   sequence="3"/>
 
-        <!-- ✅ Vista Tree -->
-        <record id="discount_load_tree_view" model="ir.ui.view">
-            <field name="name">discount.load.tree.view</field>
+        <!-- ✅ Vista List (formerly Tree) -->
+        <record id="discount_load_list_view" model="ir.ui.view">
+            <field name="name">discount.load.list.view</field>
             <field name="model">discount.load</field>
             <field name="arch" type="xml">
-                <tree string="Listado de Descuentos por Carga">
+                <list string="Listado de Descuentos por Carga">
                     <field name="load_reference_id"/>
                     <field name="load_number"/>
                     <field name="product_quantity"/>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id='unique_benefit_transaction_tree_view' model='ir.ui.view'>
-            <field name='name'>unique.benefit.transaction.tree.view</field>
+        <record id='unique_benefit_transaction_list_view' model='ir.ui.view'>
+            <field name='name'>unique.benefit.transaction.list.view</field>
             <field name='model'>unique.benefit.transaction</field>
             <field name='arch' type='xml'>
-                <tree string='Detalle de transaciones'>
+                <list string='Detalle de transaciones'>
                     <field name='tracking'  readonly="1"/>
                     <field name="partner_id" readonly="1"/>
                     <field name="partner_vat" readonly="1"/>

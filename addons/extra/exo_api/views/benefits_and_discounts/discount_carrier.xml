@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id='discount_carrier_tree_view' model='ir.ui.view'>
-            <field name='name'>discount.carrier.tree.view</field>
+        <record id='discount_carrier_list_view' model='ir.ui.view'>
+            <field name='name'>discount.carrier.list.view</field>
             <field name='model'>discount.carrier</field>
             <field name='arch' type='xml'>
-                <tree string='Listado de Beneficios y Descuentos de un cliente'>
+                <list string='Listado de Beneficios y Descuentos de un cliente'>
                     <field name='partner_id' />
                     <field name='product_quantity' />
                     <field name='discount_parameters_ids'/>

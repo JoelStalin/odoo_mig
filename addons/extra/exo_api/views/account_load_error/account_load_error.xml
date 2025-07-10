@@ -24,12 +24,12 @@
             </field>
         </record>
 
-        <!-- Tree grocery store-->
-        <record id='account_load_error_tree_view' model='ir.ui.view'>
-            <field name='name'>account.load.error.tree.view</field>
+        <!-- List View (formerly Tree) -->
+        <record id='account_load_error_list_view' model='ir.ui.view'>
+            <field name='name'>account.load.error.list.view</field>
             <field name='model'>account.load.error</field>
             <field name='arch' type='xml'>
-                <tree string='Listado de Errores de las cargas de los clientes'>
+                <list string='Listado de Errores de las cargas de los clientes'>
                     <field name='name' />
                     <field name='account_load_client_id' />
                     <field name='start_date' />

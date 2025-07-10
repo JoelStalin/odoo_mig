@@ -25,12 +25,12 @@
             </field>
         </record>
 
-        <!-- Tree grocery store-->
-        <record id='load_file_property_tree_view' model='ir.ui.view'>
-            <field name='name'>load.file.property.tree.view</field>
+        <!-- List View (formerly Tree) -->
+        <record id='load_file_property_list_view' model='ir.ui.view'>
+            <field name='name'>load.file.property.list.view</field>
             <field name='model'>load.file.property</field>
             <field name='arch' type='xml'>
-                <tree string='Listado de Propiedades de una plantilla'>
+                <list string='Listado de Propiedades de una plantilla'>
                     <field name='name' />
                     <field name='key' />
                     <field name='type' />
