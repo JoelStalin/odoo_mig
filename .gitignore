@@ -425,3 +425,7 @@ config/odoo.conf
 docker-compose.yml
 Dockerfile
 .qodo
+
+# Backup directory for upgrade script
+backups/
+upgrade.log
